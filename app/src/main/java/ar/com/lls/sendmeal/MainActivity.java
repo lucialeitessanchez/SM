@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,11 +20,23 @@ public class MainActivity extends AppCompatActivity {
     private final static Integer[] anio = {2020,2021,2022,2023 };
     private SeekBar seekBarCarga;
     private TextView carga;
+    private RadioButton rCredito,rDebito;
+    private Switch sw;
+    private Button registrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //radiogroups
+        rCredito=(RadioButton)findViewById(R.id.rBCredito);
+        rDebito=(RadioButton)findViewById(R.id.rBDebito);
+        //Switch pregunta carga inicial
+        sw = (Switch)findViewById(R.id.switch1);
+        if(sw.isActivated()){
+            seekBarCarga.setVisibility(View.VISIBLE);
+        }
         //slider
         carga = (TextView)findViewById(R.id.txtCargar);
         //spinner mes
@@ -56,5 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 }
