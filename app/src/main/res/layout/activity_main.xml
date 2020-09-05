@@ -73,7 +73,7 @@
             android:hint="@string/Numerodetar"
             />
         <EditText
-            android:id="@+id/ccv"
+            android:id="@+id/ETccv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -143,14 +143,15 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:gravity="center"
-        android:text=""
-        android:textSize="@dimen/TxVSeekbar"  />
+        android:visibility="gone"
+        android:textSize="@dimen/TxVSeekbar" />
 
     <SeekBar
         android:id="@+id/seekBarCargaInicial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        />
 
     <CheckBox
         android:id="@+id/cBxAcept"

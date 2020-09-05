@@ -3,5 +3,5 @@
     <dimen name="topTarjeta">30dp</dimen>
     <dimen name="maxTarjeta">18</dimen>
     <dimen name="maxccv">3</dimen>
-    <dimen name="TxVSeekbar">5dp</dimen>
+    <dimen name="TxVSeekbar">15dp</dimen>
 </resources>
