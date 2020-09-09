@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -15,6 +16,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 import static android.R.layout.simple_spinner_dropdown_item;
@@ -28,12 +32,14 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton rCredito,rDebito;
     private Switch sw;
     private Button registrar;
-    int p=0;
+    private Boolean esCredito;
+    private CheckBox acepterminos;
+    private int mesElegido,diferenciaM;;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //alta variables EditText y el boton
+        //alta variables EditText y botones
         email = (EditText)findViewById(R.id.ETEmail);
         clave = (EditText)findViewById(R.id.ETContraseña);
         clave2 = (EditText)findViewById(R.id.ETrpcontraseña);
@@ -41,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         tarjeta = (EditText)findViewById(R.id.numTarjeta);
         registrar = (Button)findViewById(R.id.buttonRegistrar);
         registrar.setEnabled(false);
+        acepterminos=(CheckBox)findViewById(R.id.cBxAcept);
+
         //el correo no este vacio
         if(email.getText().toString().isEmpty()){
             email.setError("El correo esta vacio");
@@ -62,20 +70,27 @@ public class MainActivity extends AppCompatActivity {
         //radiogroups
         rCredito=(RadioButton)findViewById(R.id.rBCredito);
         rDebito=(RadioButton)findViewById(R.id.rBDebito);
+        //se fija si es credito o no y lo guarda
+            if(rCredito.isChecked()){
+                esCredito=true;
+            }
+            else if(rDebito.isChecked()){
+                esCredito=false;
+            }
         //Switch pregunta carga inicial
         sw = (Switch)findViewById(R.id.switch1);
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                //se fija si esta activado, si es asi, lo muestra, junto con el valor y si no los mantiene ocultos, en el XML estan como ocultos ambos
-                if(sw.isChecked()){
-                    seekBarCarga.setVisibility(View.VISIBLE);
-                    carga.setVisibility(View.VISIBLE);
-                }
-                else{
-                    seekBarCarga.setVisibility(View.GONE);
-                    carga.setVisibility(View.GONE);
-                }
+                        //se fija si esta activado, si es asi, lo muestra, junto con el valor y si no los mantiene ocultos, en el XML estan como ocultos ambos
+                        if(sw.isChecked()){
+                            seekBarCarga.setVisibility(View.VISIBLE);
+                            carga.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            seekBarCarga.setVisibility(View.GONE);
+                            carga.setVisibility(View.GONE);
+                        }
             }
         });
         //slider
@@ -84,14 +99,23 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter<Integer>(this, simple_spinner_dropdown_item, mes);
         Spinner spinnerMes = (Spinner) findViewById(R.id.spinnerFechames);
         spinnerMes.setAdapter(adapter);
-
+            //guardo el mes que eligio en el spinner
+            mesElegido= adapter.getPosition(mes);
         //spinner anio
         ArrayAdapter adapter2 = new ArrayAdapter<Integer>(this, simple_spinner_dropdown_item, anio);
         Spinner spinnerAnio = (Spinner) findViewById(R.id.spinnerFechaanio);
         spinnerMes.setAdapter(adapter);
+
+        //si es credito es verdadero, sino falso
+        if(rCredito.isChecked()){
+            esCredito=true;
+        }
+        else{
+            esCredito=false;
+        }
+
         //slider carga (seekbar)
         seekBarCarga = (SeekBar) findViewById(R.id.seekBarCargaInicial);
-
         //Valor inicial
         seekBarCarga.setProgress(0);
         //Valor Final
@@ -99,58 +123,80 @@ public class MainActivity extends AppCompatActivity {
         seekBarCarga.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             //hace un llamado a la perilla cuando se arrastra
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            public void onProgressChanged(SeekBar seekBarCarga, int progress, boolean fromUser) {
                 carga.setText("$"+String.valueOf(progress));
+
             }
             //hace un llamado  cuando se toca la perilla
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+            public void onStartTrackingTouch(SeekBar seekBarCarga) {
 
             }
             //hace un llamado  cuando se detiene la perilla
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onStopTrackingTouch(SeekBar seekBarCarga) {
                 //guardo el valor donde para de mover
-                p=seekBar.getProgress();
+
             }
         });
 
-        //Botón Registrar
-
-        if(Validar()){
-            registrar.setEnabled(true);
-        registrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Validar()){
-
-                }
-            }
-        });
-    }}
+        //si clickea el checkbox se creatodo eso
+       acepterminos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+               //si el checkbox esta activado, el boton registrar tambien
+               if(acepterminos.isChecked()){
+                   registrar.setEnabled(true);
+               }
+           }
+       });
 
 
-    public boolean Validar(){
-            //Verificar que si ingresó una tarjeta de crédito la fecha de vencimiento por lo menos sea superior a los próximos 3 meses
-
-            //llama a la funcion validarEmail para ver si tiene el arroba y los 3 strings detras
-            if(!validarEmail()){
-                Toast.makeText(this,"El correo es invalido",Toast.LENGTH_LONG).show();
-                return false;
-            }
-                //valida que las claves sean iguales
-                if((clave.getText().toString()).equals((clave2.getText().toString()))){
-                    Toast.makeText(this,"Las claves no coinciden",Toast.LENGTH_LONG).show();
-                    return false;
-                }
-                    //carga inicial mayor a 0
-                    if(p == 0 && p<0 ){
-                    return false;
-                                        }
-
-
-return true;
     }
+
+
+    public boolean validacion(){
+            //Verificar que si ingresó una tarjeta de crédito la fecha de vencimiento por lo menos sea superior a los próximos 3 meses
+                    if(esCredito == true){
+                        //guardo el mes actual del dispositivo
+                        final Calendar c = Calendar.getInstance();
+                        int mMonth = c.get(Calendar.MONTH);
+
+                        if(mesElegido< mMonth){
+                            Toast.makeText(this,"Tarjeta vencida",Toast.LENGTH_LONG).show();
+                            return false;
+                        }
+                            else if(mesElegido==mMonth){
+                                Toast.makeText(this,"Tarjeta vencida",Toast.LENGTH_LONG).show();
+                                return false;
+                            }
+                                else { //en teoria cuenta que los meses sean superiores a 3
+                                    for(diferenciaM = 0 ; mesElegido < mMonth ; diferenciaM =  diferenciaM+1){ }
+                                    if(diferenciaM < 3){
+                                        Toast.makeText(this,"El mes de vencimiento debe ser superior a los proximos 3 meses",Toast.LENGTH_LONG).show();
+                                        return false;
+                                    }
+                                    }
+                    }
+                    //llama a la funcion validarEmail para ver si tiene el arroba y los 3 strings detras
+                    if(!validarEmail()){
+                        Toast.makeText(this,"El correo es invalido",Toast.LENGTH_LONG).show();
+                        return false;
+                    }
+                    //valida que las claves sean iguales
+                    if((clave.getText().toString()).equals((clave2.getText().toString()))){
+                        Toast.makeText(this,"Las claves no coinciden",Toast.LENGTH_LONG).show();
+                        return false;
+                    }
+                    //Si se activo 'Realizar una carga inicial' el monto del slider debe ser mayor a 0 pesos !!! no anda !!!
+                     if(sw.isActivated() && (seekBarCarga.getProgress() == 0)){
+                         Toast.makeText(this,"Debe ingresar un monto",Toast.LENGTH_LONG).show();
+                         return false;
+                     }
+
+                     return true;
+                                    }
+
     private boolean validarEmail() {
         if(email.getText().toString().contains("@")){
             int indice = email.getText().toString().indexOf("@");
@@ -162,5 +208,7 @@ return true;
         }
         return false;
     }
+
+
 
 }

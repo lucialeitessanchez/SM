@@ -35,6 +35,7 @@
         android:id="@+id/ETrpcontraseña"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textPassword"
         android:hint="@string/repcontraseña" />
     <EditText
         android:id="@+id/ETEmail"
@@ -167,7 +168,8 @@
         android:id="@+id/cBxAcept"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/AceptoTermino" />
+        android:text="@string/AceptoTermino"
+       />
 
     <Button
         android:id="@+id/buttonRegistrar"
