@@ -48,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
         registrar = (Button)findViewById(R.id.buttonRegistrar);
         registrar.setEnabled(false);
         acepterminos=(CheckBox)findViewById(R.id.cBxAcept);
-
+        //radiogroups
+        rCredito=(RadioButton)findViewById(R.id.rBCredito);
+        rDebito=(RadioButton)findViewById(R.id.rBDebito);
         //el correo no este vacio
         if(email.getText().toString().isEmpty()){
             email.setError("El correo esta vacio");
@@ -67,9 +69,11 @@ public class MainActivity extends AppCompatActivity {
         if(ccv.getText().toString().isEmpty()){
             ccv.setError("El codigo es obligatorio ");
         }
-        //radiogroups
-        rCredito=(RadioButton)findViewById(R.id.rBCredito);
-        rDebito=(RadioButton)findViewById(R.id.rBDebito);
+        //los radiobutton seleccionado alguno de los dos
+        if(!(rCredito.isChecked()) && !(rDebito.isChecked())){
+            Toast.makeText(MainActivity.this, "Ingresar un tipo de tarjeta", Toast.LENGTH_LONG).show();
+        }
+
         //se fija si es credito o no y lo guarda
             if(rCredito.isChecked()){
                 esCredito=true;
@@ -144,19 +148,52 @@ public class MainActivity extends AppCompatActivity {
        acepterminos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
            @Override
            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-               //si el checkbox esta activado, el boton registrar tambien
+               //si el checkbox esta activado, el boton registrar tambien y entra a la validacion
                if(acepterminos.isChecked()){
                    registrar.setEnabled(true);
+                       registrar.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View view) {
+                               //lo que haga el boton registrar
+                               if(validacion()) {
+                                   Toast.makeText(MainActivity.this, "Registro Exitoso", Toast.LENGTH_LONG).show();
+                               }
+                               else{
+                                   Toast.makeText(MainActivity.this, "Faltan completar campos", Toast.LENGTH_LONG).show();
+                               }
+                           }
+                       });
+                   }
+               else{ // si no se desctiva el boton registrar
+                   Toast.makeText(MainActivity.this,"No acepto terminos y condiciones",Toast.LENGTH_LONG).show();
+                   registrar.setEnabled(false);
                }
            }
        });
+
+
+
 
 
     }
 
 
     public boolean validacion(){
-            //Verificar que si ingresó una tarjeta de crédito la fecha de vencimiento por lo menos sea superior a los próximos 3 meses
+        //valida que las claves sean iguales
+        if(!((clave.getText().toString()).equals((clave2.getText().toString())) && !(clave.getText().toString().equals("")))){
+            Toast.makeText(this,"Las claves no coinciden",Toast.LENGTH_LONG).show();
+            return false;
+        }
+            //llama a la funcion validarEmail para ver si tiene el arroba y los 3 strings detras
+            if(!validarEmail()){
+                Toast.makeText(this,"El correo es invalido",Toast.LENGTH_LONG).show();
+                return false;
+                                }
+                if(!(rCredito.isChecked()) && !(rDebito.isChecked())){
+                    Toast.makeText(MainActivity.this, "Ingresar un tipo de tarjeta", Toast.LENGTH_LONG).show();
+                    return false;
+                                                                    }
+                    //Verificar que si ingresó una tarjeta de crédito la fecha de vencimiento por lo menos sea superior a los próximos 3 meses
                     if(esCredito == true){
                         //guardo el mes actual del dispositivo
                         final Calendar c = Calendar.getInstance();
@@ -177,22 +214,14 @@ public class MainActivity extends AppCompatActivity {
                                         return false;
                                     }
                                     }
-                    }
-                    //llama a la funcion validarEmail para ver si tiene el arroba y los 3 strings detras
-                    if(!validarEmail()){
-                        Toast.makeText(this,"El correo es invalido",Toast.LENGTH_LONG).show();
-                        return false;
-                    }
-                    //valida que las claves sean iguales
-                    if((clave.getText().toString()).equals((clave2.getText().toString()))){
-                        Toast.makeText(this,"Las claves no coinciden",Toast.LENGTH_LONG).show();
-                        return false;
-                    }
-                    //Si se activo 'Realizar una carga inicial' el monto del slider debe ser mayor a 0 pesos !!! no anda !!!
-                     if(sw.isActivated() && (seekBarCarga.getProgress() == 0)){
-                         Toast.makeText(this,"Debe ingresar un monto",Toast.LENGTH_LONG).show();
-                         return false;
-                     }
+                                        }
+
+
+                                //Si se activo 'Realizar una carga inicial' el monto del slider debe ser mayor a 0 pesos !!! no anda !!!
+                                 if(sw.isActivated() && (seekBarCarga.getProgress() == 0)){
+                                     Toast.makeText(this,"Debe ingresar un monto",Toast.LENGTH_LONG).show();
+                                     return false;
+                                 }
 
                      return true;
                                     }
