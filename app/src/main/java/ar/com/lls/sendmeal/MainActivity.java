@@ -193,6 +193,16 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Ingresar un tipo de tarjeta", Toast.LENGTH_LONG).show();
                     return false;
                                                                     }
+                        //la tarjeta vacia
+                        if(tarjeta.getText().toString().isEmpty()){
+                            tarjeta.setError("El numero de tarjeta es obligatorio ");
+                            return false;
+                        }
+                        //ccv no vacio
+                        if(ccv.getText().toString().isEmpty()){
+                            ccv.setError("El codigo es obligatorio ");
+                            return false;
+                        }
                     //Verificar que si ingresó una tarjeta de crédito la fecha de vencimiento por lo menos sea superior a los próximos 3 meses
                     if(esCredito == true){
                         //guardo el mes actual del dispositivo
@@ -203,11 +213,11 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(this,"Tarjeta vencida",Toast.LENGTH_LONG).show();
                             return false;
                         }
-                            else if(mesElegido==mMonth){
+                            if(mesElegido==mMonth){
                                 Toast.makeText(this,"Tarjeta vencida",Toast.LENGTH_LONG).show();
                                 return false;
                             }
-                                else { //en teoria cuenta que los meses sean superiores a 3
+                                if(mesElegido>mMonth) { //en teoria cuenta que los meses sean superiores a 3
                                     for(diferenciaM = 0 ; mesElegido < mMonth ; diferenciaM =  diferenciaM+1){ }
                                     if(diferenciaM < 3){
                                         Toast.makeText(this,"El mes de vencimiento debe ser superior a los proximos 3 meses",Toast.LENGTH_LONG).show();
@@ -218,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                                 //Si se activo 'Realizar una carga inicial' el monto del slider debe ser mayor a 0 pesos !!! no anda !!!
-                                 if(sw.isActivated() && (seekBarCarga.getProgress() == 0)){
+                                 if(sw.isChecked() && (seekBarCarga.getProgress() == 0)){
                                      Toast.makeText(this,"Debe ingresar un monto",Toast.LENGTH_LONG).show();
                                      return false;
                                  }
