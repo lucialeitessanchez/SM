@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton rCredito,rDebito;
     private Switch sw;
     private Button registrar;
-    private Boolean esCredito;
     private CheckBox acepterminos;
     private int mesElegido,diferenciaM,anioElegido;
 
@@ -74,14 +73,7 @@ public class MainActivity extends AppCompatActivity {
         if(!(rCredito.isChecked()) && !(rDebito.isChecked())){
             Toast.makeText(MainActivity.this, "Ingresar un tipo de tarjeta", Toast.LENGTH_LONG).show();
         }
-
-        //se fija si es credito o no y lo guarda
-            if(rCredito.isChecked()){
-                esCredito=true;
-            }
-            else if(rDebito.isChecked()){
-                esCredito=false;
-            }
+        
         //Switch pregunta carga inicial
         sw = (Switch)findViewById(R.id.switch1);
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
