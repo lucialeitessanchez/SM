@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private Button registrar;
     private Boolean esCredito;
     private CheckBox acepterminos;
-    private int mesElegido,diferenciaM;
+    private int mesElegido,diferenciaM,anioElegido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,18 +106,14 @@ public class MainActivity extends AppCompatActivity {
         spinnerMes.setAdapter(adapter);
             //guardo el mes que eligio en el spinner
             mesElegido= adapter.getPosition(mes);
+            anioElegido= adapter.getPosition(anio);
         //spinner anio
         ArrayAdapter adapter2 = new ArrayAdapter<Integer>(this, simple_spinner_dropdown_item, anio);
         Spinner spinnerAnio = (Spinner) findViewById(R.id.spinnerFechaanio);
         spinnerMes.setAdapter(adapter);
 
-        //si es credito es verdadero, sino falso
-        if(rCredito.isChecked()){
-            esCredito=true;
-        }
-        else{
-            esCredito=false;
-        }
+
+
 
         //slider carga (seekbar)
         seekBarCarga = (SeekBar) findViewById(R.id.seekBarCargaInicial);
@@ -205,31 +201,39 @@ public class MainActivity extends AppCompatActivity {
                             return false;
                         }
                     //Verificar que si ingresó una tarjeta de crédito la fecha de vencimiento por lo menos sea superior a los próximos 3 meses
-                    if(esCredito == true){
+                    if(rCredito.isChecked()){
                         //guardo el mes actual del dispositivo
                         final Calendar c = Calendar.getInstance();
                         int mMonth = c.get(Calendar.MONTH);
+                        int mAnio = c.get(Calendar.YEAR);
 
-                        if(mesElegido < mMonth){
+                        if(anioElegido>mAnio && mMonth==12 && (mesElegido==01 || mesElegido==02) ){ // si el mes elegido es el ultimo debe ser superior a marzo
+                            Toast.makeText(this,"El mes de vencimiento debe ser superior a los proximos 3 meses",Toast.LENGTH_LONG).show();
+                            return false;
+                                                                                                }
+
+                        if(mesElegido < mMonth && mAnio<anioElegido){
                             Toast.makeText(this,"Tarjeta vencida",Toast.LENGTH_LONG).show();
                             return false;
-                        }
-                            if(mesElegido==mMonth){
+                                                                    }
+                            if(mesElegido==mMonth && mAnio==anioElegido){
                                 Toast.makeText(this,"Tarjeta vencida",Toast.LENGTH_LONG).show();
                                 return false;
-                            }
+                                                                        }
                                 diferenciaM = 0;
-                                while(mesElegido>mMonth){ //en teoria cuenta que los meses sean superiores a 3
+                                while(mesElegido>mMonth && anioElegido==mAnio){ //cuenta que los meses sean superiores a 3
                                     diferenciaM++;}
                                     if(diferenciaM < 3){
                                         Toast.makeText(this,"El mes de vencimiento debe ser superior a los proximos 3 meses",Toast.LENGTH_LONG).show();
                                         return false;
                                                         }
+
                                     }
 
 
 
-                                //Si se activo 'Realizar una carga inicial' el monto del slider debe ser mayor a 0 pesos !!! no anda !!!
+
+        //Si se activo 'Realizar una carga inicial' el monto del slider debe ser mayor a 0 pesos !!! no anda !!!
                                  if(sw.isChecked() && (seekBarCarga.getProgress() == 0)){
                                      Toast.makeText(this,"Debe ingresar un monto",Toast.LENGTH_LONG).show();
                                      return false;
