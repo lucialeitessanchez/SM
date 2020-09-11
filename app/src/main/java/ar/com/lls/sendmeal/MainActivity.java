@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private Button registrar;
     private Boolean esCredito;
     private CheckBox acepterminos;
-    private int mesElegido,diferenciaM;;
+    private int mesElegido,diferenciaM;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -209,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
                         final Calendar c = Calendar.getInstance();
                         int mMonth = c.get(Calendar.MONTH);
 
-                        if(mesElegido< mMonth){
+                        if(mesElegido < mMonth){
                             Toast.makeText(this,"Tarjeta vencida",Toast.LENGTH_LONG).show();
                             return false;
                         }
@@ -217,14 +218,15 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(this,"Tarjeta vencida",Toast.LENGTH_LONG).show();
                                 return false;
                             }
-                                if(mesElegido>mMonth) { //en teoria cuenta que los meses sean superiores a 3
-                                    for(diferenciaM = 0 ; mesElegido < mMonth ; diferenciaM =  diferenciaM+1){ }
+                                diferenciaM = 0;
+                                while(mesElegido>mMonth){ //en teoria cuenta que los meses sean superiores a 3
+                                    diferenciaM++;}
                                     if(diferenciaM < 3){
                                         Toast.makeText(this,"El mes de vencimiento debe ser superior a los proximos 3 meses",Toast.LENGTH_LONG).show();
                                         return false;
+                                                        }
                                     }
-                                    }
-                                        }
+
 
 
                                 //Si se activo 'Realizar una carga inicial' el monto del slider debe ser mayor a 0 pesos !!! no anda !!!
