@@ -1,3 +1,42 @@
 <resources>
     <string name="app_name">Send Meal</string>
+    <string name="nombre">Nombre</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="repcontraseña">Repetir Contraseña</string>
+    <string name="email">Email</string>
+    <string name="tipotarjeta">Tipo de tarjeta:</string>
+    <string name="Debito">Debito</string>
+    <string name="Credito">Crédito</string>
+    <string name="Numerodetar">Numero de tarjeta</string>
+    <string name="CCV">CCV</string>
+    <string name="FechaVencimiento">Fecha vencimiento</string>
+    <string name="CBU">CBU</string>
+    <string name="Alias">Alias CBU</string>
+    <string name="Cargapre">Realizar carga inicial?</string>
+    <string name="AceptoTermino">Acepto los terminos y condiciones</string>
+    <string name="Registrar">Registrar</string>
+    <string name="start">0</string>
+    <string name="stop">1500</string>
+    <string-array name="mes">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+    <string-array name="anio">
+        <item>2020</item>
+        <item>2021</item>
+        <item>2022</item>
+        <item>2023</item>
+    </string-array>
+
 </resources>

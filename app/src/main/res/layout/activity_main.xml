@@ -1,18 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+    <EditText
+        android:id="@+id/ETnombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/nombre"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:id="@+id/ETContraseña"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="@string/contraseña" />
+    <EditText
+        android:id="@+id/ETrpcontraseña"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="@string/repcontraseña" />
+    <EditText
+        android:id="@+id/ETEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="@string/email" />
+
+    <TextView
+        android:layout_marginTop="@dimen/topTarjeta"
+        android:id="@+id/tvTipoTarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tipotarjeta" />
+
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+    <RadioButton
+                android:id="@+id/rBDebito"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Debito" />
+            <RadioButton
+                android:layout_marginLeft="@dimen/topTarjeta"
+                android:id="@+id/rBCredito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Credito" />
+</RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/numTarjeta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="18"
+            android:hint="@string/Numerodetar"
+            />
+        <EditText
+            android:id="@+id/ETccv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="3"
+            android:hint="@string/CCV"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/TVFechaVencimiento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/FechaVencimiento" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <Spinner
+            android:id="@+id/spinnerFechames"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:entries="@array/mes" />
+        <Spinner
+            android:id="@+id/spinnerFechaanio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:entries="@array/anio" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/ETCBU"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="@string/CBU" />
+    <EditText
+        android:id="@+id/EtALias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/Alias" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Cargapre" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtCargar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="@dimen/TxVSeekbar" />
+
+    <SeekBar
+        android:id="@+id/seekBarCargaInicial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
+
+    <CheckBox
+        android:id="@+id/cBxAcept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/AceptoTermino"
+       />
+
+    <Button
+        android:id="@+id/buttonRegistrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Registrar" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
