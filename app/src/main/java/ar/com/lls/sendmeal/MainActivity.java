@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,58 +17,56 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
 
 import static android.R.layout.simple_spinner_dropdown_item;
 
 public class MainActivity extends AppCompatActivity {
-    private final static Integer[] mes = {1,2,3,4,5,6,7,8,9,10,11,12 };
-    private final static Integer[] anio = {2020,2021,2022,2023 };
-    private SeekBar seekBarCarga;
-    private TextView carga;
-    private EditText email,clave,clave2,ccv,tarjeta;
+    private final static Integer[] mes = {1,2,3,4,5,6,7,8,9,10,11,12};
+    private final static Integer[] anio = {2019,2020,2021,2022,2023};
+    private SeekBar mSeekBarCarga;
+    private TextView mTextCarga;
+    private EditText mEmail, mClave, mClave2, mCcv, mTarjeta;
     private RadioButton rCredito,rDebito;
-    private Switch sw;
-    private Button registrar;
-    private CheckBox acepterminos;
-    private int mesElegido,diferenciaM,anioElegido;
+    private Switch mSwitch1;
+    private Button mButtonRegistrar;
+    private CheckBox mCheckAcepTerminos;
+    private int mMesElegido, mAnioElegido;
+    private Spinner spinnerAnio, spinnerMes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //alta variables EditText y botones
-        email = (EditText)findViewById(R.id.ETEmail);
-        clave = (EditText)findViewById(R.id.ETContraseña);
-        clave2 = (EditText)findViewById(R.id.ETrpcontraseña);
-        ccv = (EditText)findViewById(R.id.ETccv);
-        tarjeta = (EditText)findViewById(R.id.numTarjeta);
-        registrar = (Button)findViewById(R.id.buttonRegistrar);
-        registrar.setEnabled(false);
-        acepterminos=(CheckBox)findViewById(R.id.cBxAcept);
+        mEmail = (EditText)findViewById(R.id.ETEmail);
+        mClave = (EditText)findViewById(R.id.ETContraseña);
+        mClave2 = (EditText)findViewById(R.id.ETrpcontraseña);
+        mCcv = (EditText)findViewById(R.id.ETccv);
+        mTarjeta = (EditText)findViewById(R.id.numTarjeta);
+        mButtonRegistrar = (Button)findViewById(R.id.buttonRegistrar);
+        mButtonRegistrar.setEnabled(false);
+        mCheckAcepTerminos =(CheckBox)findViewById(R.id.cBxAcept);
         //radiogroups
         rCredito=(RadioButton)findViewById(R.id.rBCredito);
         rDebito=(RadioButton)findViewById(R.id.rBDebito);
         //el correo no este vacio
-        if(email.getText().toString().isEmpty()){
-            email.setError("El correo esta vacio");
+        if(mEmail.getText().toString().isEmpty()) {
+            mEmail.setError("El correo esta vacio");
         }
 
         //la clave no sea vacia
-        if(clave.getText().toString().isEmpty()){
-            clave.setError("La clave es vacia ");
+        if(mClave.getText().toString().isEmpty()) {
+            mClave.setError("La clave es vacia ");
         }
 
         //la tarjeta vacia
-        if(tarjeta.getText().toString().isEmpty()){
-            tarjeta.setError("El numero de tarjeta es obligatorio ");
+        if(mTarjeta.getText().toString().isEmpty()){
+            mTarjeta.setError("El numero de tarjeta es obligatorio ");
         }
         //ccv no vacio
-        if(ccv.getText().toString().isEmpty()){
-            ccv.setError("El codigo es obligatorio ");
+        if(mCcv.getText().toString().isEmpty()){
+            mCcv.setError("El codigo es obligatorio ");
         }
         //los radiobutton seleccionado alguno de los dos
         if(!(rCredito.isChecked()) && !(rDebito.isChecked())){
@@ -75,49 +74,68 @@ public class MainActivity extends AppCompatActivity {
         }
         
         //Switch pregunta carga inicial
-        sw = (Switch)findViewById(R.id.switch1);
-        sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mSwitch1 = (Switch)findViewById(R.id.switch1);
+        mSwitch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        //se fija si esta activado, si es asi, lo muestra, junto con el valor y si no los mantiene ocultos, en el XML estan como ocultos ambos
-                        if(sw.isChecked()){
-                            seekBarCarga.setVisibility(View.VISIBLE);
-                            carga.setVisibility(View.VISIBLE);
-                        }
-                        else{
-                            seekBarCarga.setVisibility(View.GONE);
-                            carga.setVisibility(View.GONE);
-                        }
+                //se fija si esta activado, si es asi, lo muestra, junto con el valor y si no los mantiene ocultos, en el XML estan como ocultos ambos
+                if(mSwitch1.isChecked()){
+                    mSeekBarCarga.setVisibility(View.VISIBLE);
+                    mTextCarga.setVisibility(View.VISIBLE);
+                }
+                else{
+                    mSeekBarCarga.setVisibility(View.GONE);
+                    mTextCarga.setVisibility(View.GONE);
+                }
             }
         });
         //slider
-        carga = (TextView)findViewById(R.id.txtCargar);
+        mTextCarga = (TextView)findViewById(R.id.txtCargar);
         //spinner mes
         ArrayAdapter adapter = new ArrayAdapter<Integer>(this, simple_spinner_dropdown_item, mes);
-        Spinner spinnerMes = (Spinner) findViewById(R.id.spinnerFechames);
+        spinnerMes = (Spinner) findViewById(R.id.spinnerFechames);
         spinnerMes.setAdapter(adapter);
-            //guardo el mes que eligio en el spinner
-            mesElegido= adapter.getPosition(mes);
-            anioElegido= adapter.getPosition(anio);
-        //spinner anio
+        //guardo el mes que eligio en el spinner
+        spinnerMes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mMesElegido = mes[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+            //spinner anio
         ArrayAdapter adapter2 = new ArrayAdapter<Integer>(this, simple_spinner_dropdown_item, anio);
-        Spinner spinnerAnio = (Spinner) findViewById(R.id.spinnerFechaanio);
-        spinnerMes.setAdapter(adapter);
+        spinnerAnio = (Spinner) findViewById(R.id.spinnerFechaanio);
+        spinnerAnio.setAdapter(adapter2);
 
+        spinnerAnio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mAnioElegido = anio[position];
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
 
         //slider carga (seekbar)
-        seekBarCarga = (SeekBar) findViewById(R.id.seekBarCargaInicial);
+        mSeekBarCarga = (SeekBar) findViewById(R.id.seekBarCargaInicial);
         //Valor inicial
-        seekBarCarga.setProgress(0);
+        mSeekBarCarga.setProgress(0);
         //Valor Final
-        seekBarCarga.setMax(1500);
-        seekBarCarga.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        mSeekBarCarga.setMax(1500);
+        mSeekBarCarga.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             //hace un llamado a la perilla cuando se arrastra
             @Override
             public void onProgressChanged(SeekBar seekBarCarga, int progress, boolean fromUser) {
-                carga.setText("$"+String.valueOf(progress));
+                mTextCarga.setText("$"+String.valueOf(progress));
 
             }
             //hace un llamado  cuando se toca la perilla
@@ -134,111 +152,137 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //si clickea el checkbox se creatodo eso
-       acepterminos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+       mCheckAcepTerminos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
            @Override
            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-               //si el checkbox esta activado, el boton registrar tambien y entra a la validacion
-               if(acepterminos.isChecked()){
-                   registrar.setEnabled(true);
-                       registrar.setOnClickListener(new View.OnClickListener() {
-                           @Override
-                           public void onClick(View view) {
-                               //lo que haga el boton registrar
-                               if(validacion()) {
-                                   Toast.makeText(MainActivity.this, "Registro Exitoso", Toast.LENGTH_LONG).show();
-                               }
-                               else{
-                                   Toast.makeText(MainActivity.this, "Faltan completar campos", Toast.LENGTH_LONG).show();
-                               }
+           //si el checkbox esta activado, el boton registrar tambien y entra a la validacion
+           if(mCheckAcepTerminos.isChecked()){
+               mButtonRegistrar.setEnabled(true);
+                   mButtonRegistrar.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View view) {
+                           //lo que haga el boton registrar
+                           if(validacion()) {
+                               Toast.makeText(MainActivity.this, "Registro Exitoso", Toast.LENGTH_LONG).show();
                            }
-                       });
-                   }
-               else{ // si no se desctiva el boton registrar
-                   Toast.makeText(MainActivity.this,"No acepto terminos y condiciones",Toast.LENGTH_LONG).show();
-                   registrar.setEnabled(false);
-               }
+                           else{
+                               Toast.makeText(MainActivity.this, "ERROR: Verifique los datos ingresados. Puede faltar campos por completar.", Toast.LENGTH_LONG).show();
+                           }
+                       }
+                   });
+           }
+           else { // si no se desctiva el boton registrar
+               Toast.makeText(MainActivity.this,"No acepto terminos y condiciones",Toast.LENGTH_LONG).show();
+               mButtonRegistrar.setEnabled(false);
+           }
            }
        });
-
-
-
-
-
     }
-
 
     public boolean validacion(){
         //valida que las claves sean iguales
-        if(!((clave.getText().toString()).equals((clave2.getText().toString())) && !(clave.getText().toString().equals("")))){
+        if(!((mClave.getText().toString()).equals((mClave2.getText().toString())) && !(mClave.getText().toString().equals("")))){
             Toast.makeText(this,"Las claves no coinciden",Toast.LENGTH_LONG).show();
+            mClave2.setError("Las claves no coinciden");
             return false;
         }
-            //llama a la funcion validarEmail para ver si tiene el arroba y los 3 strings detras
-            if(!validarEmail()){
-                Toast.makeText(this,"El correo es invalido",Toast.LENGTH_LONG).show();
-                return false;
-                                }
-                if(!(rCredito.isChecked()) && !(rDebito.isChecked())){
-                    Toast.makeText(MainActivity.this, "Ingresar un tipo de tarjeta", Toast.LENGTH_LONG).show();
+
+        //llama a la funcion validarEmail para ver si tiene el arroba y los 3 strings detra
+        if(!validarEmail()){
+            mEmail.setError("El correo es invalido. Verifique su formato");
+            Toast.makeText(this,"El correo es invalido",Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if(!(rCredito.isChecked()) && !(rDebito.isChecked())){
+            rCredito.setError("Ingresar un tipo de tarjeta");
+            Toast.makeText(MainActivity.this, "Ingresar un tipo de tarjeta", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        //la tarjeta vacia
+        if(mTarjeta.getText().toString().isEmpty()){
+            mTarjeta.setError("El numero de tarjeta es obligatorio ");
+            return false;
+        }
+
+        //ccv no vacio
+        if(mCcv.getText().toString().isEmpty()){
+            mCcv.setError("El codigo es obligatorio ");
+            return false;
+        }
+
+        //Verificar que si ingresó una tarjeta de crédito la fecha de vencimiento por lo menos sea superior a los próximos 3 meses
+        if(rCredito.isChecked()){
+            //guardo el mes actual del dispositivo
+            final Calendar c = Calendar.getInstance();
+            int mMonthActual = c.get(Calendar.MONTH) + 1;
+            int mAnioActual = c.get(Calendar.YEAR);
+            boolean mCumpleCondicion = false;
+
+            if (mAnioActual == mAnioElegido){
+                if (mMonthActual < mMesElegido) {
+                    mCumpleCondicion =  ((mMesElegido - mMonthActual) > 3) ? true : false;
+                }
+                else if(mMonthActual >= mMesElegido) {
+                    mTarjeta.setError("Tarjeta vencida");
+                    Toast.makeText(this,"Tarjeta vencida" ,Toast.LENGTH_LONG).show();
                     return false;
-                                                                    }
-                        //la tarjeta vacia
-                        if(tarjeta.getText().toString().isEmpty()){
-                            tarjeta.setError("El numero de tarjeta es obligatorio ");
-                            return false;
+                }
+            }
+            else if (mAnioActual > mAnioElegido) {
+                mTarjeta.setError("Tarjeta vencida");
+                Toast.makeText(this,"Tarjeta vencida",Toast.LENGTH_LONG).show();
+                return false;
+            }
+            else if (mAnioActual < mAnioElegido) {
+                if ( (mAnioElegido - mAnioActual) <= 1 ) {
+                    if (mMonthActual == mMesElegido) {
+                        mCumpleCondicion = true;
+                    }
+                    else {
+                        switch (mMonthActual){
+                            case 12:
+                                mCumpleCondicion = (mMesElegido <= 3) ? false : true;
+                                break;
+                            case 11:
+                                mCumpleCondicion = (mMesElegido <= 2) ? false : true;
+                                break;
+                            case 10:
+                                mCumpleCondicion = (mMesElegido == 1) ? false : true;
+                                break;
+                            default:
+                                mCumpleCondicion = true;
+                                break;
                         }
-                        //ccv no vacio
-                        if(ccv.getText().toString().isEmpty()){
-                            ccv.setError("El codigo es obligatorio ");
-                            return false;
-                        }
-                    //Verificar que si ingresó una tarjeta de crédito la fecha de vencimiento por lo menos sea superior a los próximos 3 meses
-                    if(rCredito.isChecked()){
-                        //guardo el mes actual del dispositivo
-                        final Calendar c = Calendar.getInstance();
-                        int mMonth = c.get(Calendar.MONTH);
-                        int mAnio = c.get(Calendar.YEAR);
+                    }
+                }
+                else {
+                    mCumpleCondicion = true;
+                }
+            }
 
-                        if(anioElegido>mAnio && mMonth==12 && (mesElegido==01 || mesElegido==02) ){ // si el mes elegido es el ultimo debe ser superior a marzo
-                            Toast.makeText(this,"El mes de vencimiento debe ser superior a los proximos 3 meses",Toast.LENGTH_LONG).show();
-                            return false;
-                                                                                                }
-
-                        if(mesElegido < mMonth && mAnio<anioElegido){
-                            Toast.makeText(this,"Tarjeta vencida",Toast.LENGTH_LONG).show();
-                            return false;
-                                                                    }
-                            if(mesElegido==mMonth && mAnio==anioElegido){
-                                Toast.makeText(this,"Tarjeta vencida",Toast.LENGTH_LONG).show();
-                                return false;
-                                                                        }
-                                diferenciaM = 0;
-                                while(mesElegido>mMonth && anioElegido==mAnio){ //cuenta que los meses sean superiores a 3
-                                    diferenciaM++;}
-                                    if(diferenciaM < 3){
-                                        Toast.makeText(this,"El mes de vencimiento debe ser superior a los proximos 3 meses",Toast.LENGTH_LONG).show();
-                                        return false;
-                                                        }
-
-                                    }
-
-
-
+            if(mCumpleCondicion == false){
+                mTarjeta.setError("El mes de vencimiento debe ser superior a los proximos 3 meses");
+                Toast.makeText(this,"El mes de vencimiento debe ser superior a los proximos 3 meses",Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
 
         //Si se activo 'Realizar una carga inicial' el monto del slider debe ser mayor a 0 pesos !!! no anda !!!
-                                 if(sw.isChecked() && (seekBarCarga.getProgress() == 0)){
-                                     Toast.makeText(this,"Debe ingresar un monto",Toast.LENGTH_LONG).show();
-                                     return false;
-                                 }
+         if(mSwitch1.isChecked() && (mSeekBarCarga.getProgress() == 0)){
+             Toast.makeText(this,"Debe ingresar un monto",Toast.LENGTH_LONG).show();
+             return false;
+         }
 
-                     return true;
-                                    }
+         return true;
+    }
 
     private boolean validarEmail() {
-        if(email.getText().toString().contains("@")){
-            int indice = email.getText().toString().indexOf("@");
+        if(mEmail.getText().toString().contains("@")){
+            int indice = mEmail.getText().toString().indexOf("@");
             int j = 0;
-            for(int i = (indice + 1); i < email.getText().length(); i++){
+            for(int i = (indice + 1); i < mEmail.getText().length(); i++){
                 j++;
             }
             return (j >= 3);
