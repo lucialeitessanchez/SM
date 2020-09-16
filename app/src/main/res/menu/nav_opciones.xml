@@ -9,12 +9,12 @@
         <item
             android:id="@+id/menu_nuevoPlato"
             android:title="@string/NuevoPlato"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_mas"
             />
         <item
             android:title="@string/ListaPlatos"
             android:id="@+id/menu_ListaPlatos"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/nuevoplat"
             />
 
         <item
