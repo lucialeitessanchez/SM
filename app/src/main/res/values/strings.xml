@@ -18,6 +18,8 @@
     <string name="start">0</string>
     <string name="stop">1500</string>
     <string name="MenuBienv">Menú SendMeal</string>
+    <string name="NuevoPlato">Nuevo Plato</string>
+    <string name="ListaPlatos">Lista Platos</string>
     <string-array name="mes">
         <item>1</item>
         <item>2</item>

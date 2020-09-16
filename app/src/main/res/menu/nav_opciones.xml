@@ -4,23 +4,19 @@
         <item
             android:id="@+id/menu_Registrar"
             android:title="@string/Registrar"
-            android:icon="@drawable/ic_calculadoras"
+            android:icon="@drawable/registro"
             />
         <item
-            android:id="@+id/menu_records"
-            android:title="Mis records"
-            android:icon="@android:drawable/ic_input_get"
+            android:id="@+id/menu_nuevoPlato"
+            android:title="@string/NuevoPlato"
+            android:icon="@mipmap/ic_launcher"
             />
         <item
-            android:title="Recetas"
-            android:id="@+id/menu_recetas"
-            android:icon="@drawable/ic_recetas"
+            android:title="@string/ListaPlatos"
+            android:id="@+id/menu_ListaPlatos"
+            android:icon="@drawable/ic_launcher_background"
             />
-        <item
-            android:title="Motivación"
-            android:id="@+id/menu_motivacion"
-            android:icon="@drawable/ic_motivacion"
-            />
+
         <item
             android:title="Información"
             android:id="@+id/menu_informacion"
