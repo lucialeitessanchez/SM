@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_Registrar"
+            android:title="@string/Registrar"
+            android:icon="@drawable/ic_calculadoras"
+            />
+        <item
+            android:id="@+id/menu_records"
+            android:title="Mis records"
+            android:icon="@android:drawable/ic_input_get"
+            />
+        <item
+            android:title="Recetas"
+            android:id="@+id/menu_recetas"
+            android:icon="@drawable/ic_recetas"
+            />
+        <item
+            android:title="Motivación"
+            android:id="@+id/menu_motivacion"
+            android:icon="@drawable/ic_motivacion"
+            />
+        <item
+            android:title="Información"
+            android:id="@+id/menu_informacion"
+            android:icon="@android:drawable/ic_dialog_info"
+            />
+    </group>
+</menu>

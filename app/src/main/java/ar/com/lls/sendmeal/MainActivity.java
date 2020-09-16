@@ -23,7 +23,7 @@ import static android.R.layout.simple_spinner_dropdown_item;
 
 public class MainActivity extends AppCompatActivity {
     private final static Integer[] mes = {1,2,3,4,5,6,7,8,9,10,11,12};
-    private final static Integer[] anio = {2019,2020,2021,2022,2023};
+    private final static Integer[] anio = {2020,2021,2022,2023};
     private SeekBar mSeekBarCarga;
     private TextView mTextCarga;
     private EditText mEmail, mClave, mClave2, mCcv, mTarjeta;

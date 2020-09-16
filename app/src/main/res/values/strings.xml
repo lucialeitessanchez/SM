@@ -17,6 +17,7 @@
     <string name="Registrar">Registrar</string>
     <string name="start">0</string>
     <string name="stop">1500</string>
+    <string name="MenuBienv">Menú SendMeal</string>
     <string-array name="mes">
         <item>1</item>
         <item>2</item>

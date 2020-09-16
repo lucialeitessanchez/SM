@@ -4,4 +4,7 @@
     <dimen name="maxTarjeta">18</dimen>
     <dimen name="maxccv">3</dimen>
     <dimen name="TxVSeekbar">15dp</dimen>
+    <dimen name="toolbarE">4dp</dimen>
+    <dimen name="TxVF">10dp</dimen>
+    <dimen name="Imagnavigation">200dp</dimen>
 </resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/moto"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/Imagnavigation"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/nenitosolo" />
+
+    <TextView
+        android:id="@+id/tvBienvFrame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/MenuBienv"
+        android:textAppearance="@style/AppTheme"
+        android:textStyle="bold"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/TxVF"
+        android:layout_marginBottom="@dimen/TxVF"
+        />
+
+</FrameLayout>
