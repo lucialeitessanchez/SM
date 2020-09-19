@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -19,12 +21,14 @@ public class HomeActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private ImageView imagen;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
 
         //inicializacion del drawer y nav para la toolbar
         setToolBar();
@@ -37,6 +41,7 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                Intent i;
                 switch (item.getItemId()){
+                    //si toca el icono de registrar, entra a la clase de registro
                     case (R.id.menu_Registrar):
                         i = new Intent(HomeActivity.this,MainActivity.class);
                         startActivity(i);

@@ -1,6 +1,8 @@
 package ar.com.lls.sendmeal;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +19,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import java.util.Calendar;
 
 import static android.R.layout.simple_spinner_dropdown_item;
@@ -26,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private final static Integer[] anio = {2020,2021,2022,2023};
     private SeekBar mSeekBarCarga;
     private TextView mTextCarga;
+
     private EditText mEmail, mClave, mClave2, mCcv, mTarjeta;
     private RadioButton rCredito,rDebito;
     private Switch mSwitch1;
@@ -33,12 +39,16 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox mCheckAcepTerminos;
     private int mMesElegido, mAnioElegido;
     private Spinner spinnerAnio, spinnerMes;
+    private Toolbar toolbar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //alta variables EditText y botones
+
         mEmail = (EditText)findViewById(R.id.ETEmail);
         mClave = (EditText)findViewById(R.id.ETContraseña);
         mClave2 = (EditText)findViewById(R.id.ETrpcontraseña);
@@ -50,6 +60,16 @@ public class MainActivity extends AppCompatActivity {
         //radiogroups
         rCredito=(RadioButton)findViewById(R.id.rBCredito);
         rDebito=(RadioButton)findViewById(R.id.rBDebito);
+
+        //toolbar
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true); //boton atras
+        // le pongo el titulo de la actividad
+        actionBar.setTitle(R.string.Registrar);
+
+
         //el correo no este vacio
         if(mEmail.getText().toString().isEmpty()) {
             mEmail.setError("El correo esta vacio");
@@ -178,6 +198,8 @@ public class MainActivity extends AppCompatActivity {
            }
        });
     }
+
+
 
     public boolean validacion(){
         //valida que las claves sean iguales

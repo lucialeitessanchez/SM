@@ -9,4 +9,13 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
+    <ImageView
+    android:id="@+id/toolbarIcon"
+    android:src="@drawable/motoicon"
+        android:layout_marginLeft="@dimen/IconoTulbar"
+    android:scaleType="fitCenter"
+    android:layout_width="@dimen/IconoTulbar"
+    android:layout_height="wrap_content"
+    />
+
 </androidx.appcompat.widget.Toolbar>
