@@ -8,4 +8,5 @@
     <dimen name="TxVF">10dp</dimen>
     <dimen name="Imagnavigation">200dp</dimen>
     <dimen name="IconoTulbar">60dp</dimen>
+    <dimen name="topDescripcionPlato">60dp</dimen>
 </resources>

@@ -15,11 +15,18 @@
     <string name="Cargapre">Realizar carga inicial?</string>
     <string name="AceptoTermino">Acepto los terminos y condiciones</string>
     <string name="Registrar">Registrar</string>
+    <string name="crearPlato">Crear plato</string>
+
     <string name="start">0</string>
     <string name="stop">1500</string>
     <string name="MenuBienv">Menú SendMeal</string>
     <string name="NuevoPlato">Nuevo Plato</string>
     <string name="ListaPlatos">Lista Platos</string>
+    <string name="tituloPlato">Título del plato</string>
+    <string name="descripcionPlato">Descripción</string>
+    <string name="precioPlato">Precio</string>
+    <string name="caloriasPlato">Calorias</string>
+    <string name="guardarPlato">Guardar</string>
     <string-array name="mes">
         <item>1</item>
         <item>2</item>
