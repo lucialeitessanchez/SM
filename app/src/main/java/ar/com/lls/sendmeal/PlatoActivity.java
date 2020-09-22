@@ -5,22 +5,63 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import ar.com.lls.sendmeal.model.Plato;
 
 public class PlatoActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private EditText tituloPlato;
+    private EditText descripcionPlato;
+    private EditText precioPlato;
+    private EditText caloriasPlato;
+    private Button btnGuardar;
+
+
+    Double precioPlatoD;
+    Integer caloriasPlatoInt;
+    String tituloPlatoStr;
+    String descripcionPlatoStr;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plato);
 
-        //toolbar
+        //toolbar en crear plato
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true); //boton atras
         // le pongo el titulo de la actividad
         actionBar.setTitle(R.string.crearPlato);
+
+        tituloPlato = (EditText)findViewById(R.id.ETtituloPlato) ;
+        descripcionPlato = (EditText)findViewById(R.id.ETdescripcionPlato);
+        precioPlato = (EditText)findViewById(R.id.ETPrecioPlato);
+        caloriasPlato = (EditText)findViewById(R.id.ETcaloriasPlato);
+
+
+
+
+        btnGuardar = (Button)findViewById(R.id.btnGuardarPlato);
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tituloPlatoStr = tituloPlato.getText().toString();
+                descripcionPlatoStr = descripcionPlato.getText().toString();
+                precioPlatoD = Double.parseDouble(precioPlato.getText().toString());
+                caloriasPlatoInt = Integer.parseInt(caloriasPlato.getText().toString());
+
+                Plato platoCreado = new Plato(tituloPlatoStr,descripcionPlatoStr,precioPlatoD,caloriasPlatoInt);
+                Plato.listaPlatos.add(platoCreado);
+            }
+        });
     }
 }
