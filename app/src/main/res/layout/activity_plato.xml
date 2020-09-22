@@ -33,7 +33,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/numTarjeta"
+            android:id="@+id/ETPrecioPlato"
             android:layout_width="162dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
@@ -42,7 +42,7 @@
             android:maxLength="18" />
 
         <EditText
-            android:id="@+id/ETccv"
+            android:id="@+id/ETcaloriasPlato"
             android:layout_width="192dp"
             android:layout_height="wrap_content"
             android:hint="@string/caloriasPlato"
@@ -51,7 +51,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/buttonRegistrar"
+        android:id="@+id/btnGuardarPlato"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
