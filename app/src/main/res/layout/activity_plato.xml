@@ -21,7 +21,6 @@
         android:id="@+id/ETdescripcionPlato"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
         android:layout_marginTop="@dimen/topDescripcionPlato"
         android:hint="@string/descripcionPlato"
         android:inputType="textPersonName"

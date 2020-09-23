@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-               Intent i, j;
+               Intent i;
                 switch (item.getItemId()){
                     //si toca el icono de registrar, entra a la clase de registro
                     case (R.id.menu_Registrar):
@@ -52,6 +52,8 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case(R.id.menu_ListaPlatos):
                         // listar platos
+                        i = new Intent(HomeActivity.this,ListaPlatos.class);
+                        startActivity(i);
                         break;
                     case(R.id.menu_informacion):
                         // tirar informacion de la aplicacion
