@@ -9,4 +9,6 @@
     <dimen name="Imagnavigation">200dp</dimen>
     <dimen name="IconoTulbar">60dp</dimen>
     <dimen name="topDescripcionPlato">60dp</dimen>
+    <dimen name="marginCard1">10dp</dimen>
+
 </resources>

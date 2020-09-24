@@ -24,6 +24,7 @@ public class ListaPlatos extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +39,15 @@ public class ListaPlatos extends AppCompatActivity {
         actionBar.setTitle(R.string.ListaPlatos);
 
         //Inicializar Platos
-        List items = new ArrayList();
+        //List items = new ArrayList();
+
+
 
         //agrego los platos a pata
-        items.add(new Plato("Pollo", "Pollo a la parrilla con papas", 230.0, 200));
+        /*items.add(new Plato("Pollo", "Pollo a la parrilla con papas", 230.0, 200));
         items.add(new Plato("Sushi", "8 rolls de sushi clàsico", 300.50, 480));
         items.add(new Plato("Canelones", "Canelones de verdura", 500.0, 393));
-        items.add(new Plato("Asado", "tira de asado a la parrilla", 900.0, 471));
+        items.add(new Plato("Asado", "tira de asado a la parrilla", 900.0, 471));*/
 
         //Obtener el Recycler
         recycler = (RecyclerView) findViewById(R.id.listaPlatosRecyclerView);
@@ -55,8 +58,10 @@ public class ListaPlatos extends AppCompatActivity {
         recycler.setLayoutManager(layoutManager);
 
         //Crea un nuevo adaptador
-        adapter = new PlatoAdapter(items);
+        Plato varPlato = new Plato();
+        List<Plato> listaItems = varPlato.getListaPlatos();
+        adapter = new PlatoAdapter(listaItems);
         recycler.setAdapter(adapter);
-
+        varPlato.inicializarPlatos(); // fijate esto si no como programarlo mejor
     }
 }

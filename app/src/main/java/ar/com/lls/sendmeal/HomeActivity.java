@@ -57,6 +57,9 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case(R.id.menu_informacion):
                         // tirar informacion de la aplicacion
+                        i = new Intent(HomeActivity.this,HomeActivity.class);
+                        Toast.makeText(HomeActivity.this,"Laboratorio de Gauchat,Leites,Piedrabuena",Toast.LENGTH_LONG).show();
+                        startActivity(i);
                         break;
                 }
                 return false;

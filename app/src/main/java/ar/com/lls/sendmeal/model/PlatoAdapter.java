@@ -1,5 +1,6 @@
 package ar.com.lls.sendmeal.model;
 
+import android.nfc.cardemulation.CardEmulation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -22,6 +24,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         public TextView titulo;
         public TextView precio;
         public TextView descripcion;
+        public CardView cardView;
 
         public PlatoViewHolder(View v) {
             super(v);
@@ -29,7 +32,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
             titulo = (TextView) v.findViewById(R.id.tituloPlato);
             precio = (TextView) v.findViewById(R.id.precioPlato);
             descripcion = (TextView) v.findViewById(R.id.descripcionPlato);
-
+            cardView = (CardView) v.findViewById(R.id.card_view); // pa k?
 
         }
     }
@@ -49,7 +52,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
     public void onBindViewHolder(@NonNull PlatoAdapter.PlatoViewHolder holder, int position) {
         //holder.imagen.setImageResource(items.get(position).getImagen()); por ahora no porque va la imagen para todos igual
         holder.titulo.setText(items.get(position).getTitulo());
-        holder.precio.setText(items.get(position).getPrecio().toString()); //ojo hay que hacerlo string porque devuelve un entero
+        holder.precio.setText("$"+items.get(position).getPrecio().toString()); //ojo hay que hacerlo string porque devuelve un entero
         holder.descripcion.setText(items.get(position).getDescripcion());
     }
 
