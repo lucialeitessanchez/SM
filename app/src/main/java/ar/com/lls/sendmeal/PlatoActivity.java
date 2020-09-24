@@ -49,11 +49,14 @@ public class PlatoActivity extends AppCompatActivity {
 
 
 
-
         btnGuardar = (Button)findViewById(R.id.btnGuardarPlato);
         btnGuardar.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
+
+                if(validarCamposPlato()){
                 tituloPlatoStr = tituloPlato.getText().toString();
                 descripcionPlatoStr = descripcionPlato.getText().toString();
                 precioPlatoD = Double.parseDouble(precioPlato.getText().toString());
@@ -61,7 +64,33 @@ public class PlatoActivity extends AppCompatActivity {
 
                 Plato platoCreado = new Plato(tituloPlatoStr,descripcionPlatoStr,precioPlatoD,caloriasPlatoInt);
                 Plato.listaPlatos.add(platoCreado);
+                Toast.makeText(PlatoActivity.this,"El plato ingresado, se ha guardado correctamente",Toast.LENGTH_LONG).show();
+                //limpio para que pueda ingresar otro nuevo plato si quiere
+                tituloPlato.setText("");
+                descripcionPlato.setText("");
+                precioPlato.setText("");
+                caloriasPlato.setText("");
+                }
+            else{
+                Toast.makeText(PlatoActivity.this,"Faltan ingresar campos",Toast.LENGTH_LONG).show();
+                }
             }
         });
+    }
+
+    public boolean validarCamposPlato(){
+        if(tituloPlato.getText().toString().isEmpty()){
+            Toast.makeText(PlatoActivity.this,"Debe ingresar un titulo",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(descripcionPlato.getText().toString().isEmpty()){
+            Toast.makeText(PlatoActivity.this,"Debe ingresar una descripcion",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(precioPlato.getText().toString().isEmpty()){
+            Toast.makeText(PlatoActivity.this,"Debe ingresar un precio valido",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 }

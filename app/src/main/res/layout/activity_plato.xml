@@ -10,6 +10,7 @@
     <include layout="@layout/toolbar" />
 
     <EditText
+        android:layout_marginTop="@dimen/topDescripcionPlato"
         android:id="@+id/ETtituloPlato"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +22,6 @@
         android:id="@+id/ETdescripcionPlato"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/topDescripcionPlato"
         android:hint="@string/descripcionPlato"
         android:inputType="textPersonName"
         />
@@ -51,7 +51,9 @@
 
     <Button
         android:id="@+id/btnGuardarPlato"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:shadowRadius="20dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="@string/guardarPlato" />
