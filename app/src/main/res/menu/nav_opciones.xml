@@ -16,6 +16,11 @@
             android:id="@+id/menu_ListaPlatos"
             android:icon="@drawable/nuevoplat"
             />
+        <item
+            android:title="@string/Pedido"
+            android:id="@+id/menu_pedido"
+            android:icon="@drawable/pedido"
+            />
 
         <item
             android:title="Información"

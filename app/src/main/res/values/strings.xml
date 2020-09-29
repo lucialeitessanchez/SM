@@ -27,6 +27,7 @@
     <string name="precioPlato">Precio</string>
     <string name="caloriasPlato">Calorias</string>
     <string name="guardarPlato">Guardar</string>
+    <string name="Pedido">Pedido</string>
     <string-array name="mes">
         <item>1</item>
         <item>2</item>
