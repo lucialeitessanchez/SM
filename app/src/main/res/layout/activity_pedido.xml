@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PedidoActivity">
+
+    <include layout="@layout/toolbar"/>
+
+
+    <EditText
+        android:id="@+id/ETEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/email" />
+
+    <TextView
+        android:id="@+id/TVtakeAwayOenvio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tipoPedido" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/RBenvio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/envioDomicilio" />
+
+        <RadioButton
+            android:id="@+id/RBtakeAway"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/takeAway" />
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/TVdondeEnviamos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dondeEnviamos" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/RBcasa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/casa" />
+
+        <RadioButton
+            android:id="@+id/RBdepartamento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/departamento" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/ETdireccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="@string/direccion" />
+
+        <EditText
+            android:id="@+id/ETaltura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="@string/altura" />
+
+        <EditText
+            android:id="@+id/ETdpto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="@string/departamento" />
+
+        <EditText
+            android:id="@+id/ETpiso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="@string/piso" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/BTNencargarPlato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/encargarPlatos"
+        android:visibility="visible"></Button>
+
+
+</LinearLayout>

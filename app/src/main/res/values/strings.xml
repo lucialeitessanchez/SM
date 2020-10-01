@@ -27,7 +27,20 @@
     <string name="precioPlato">Precio</string>
     <string name="caloriasPlato">Calorias</string>
     <string name="guardarPlato">Guardar</string>
-    <string name="Pedido">Pedido</string>
+    <string name="NuevoPedido">Nuevo Pedido</string>
+    <string name="Informacion">Información</string>
+    <string name="tipoPedido">¿Lo enviamos o retiras en el lugar?</string>
+    <string name="direccion">Dirección</string>
+    <string name="altura">Altura</string>
+    <string name="casa">Casa</string>
+    <string name="departamento">Departamento</string>
+    <string name="piso">Piso</string>
+    <string name="dondeEnviamos">¿A dónde lo enviamos?</string>
+    <string name="encargarPlatos">Encargar Platos</string>
+    <string name="realizarPedido">Realizar pedido</string>
+    <string name="envioDomicilio">Envio a domicilio</string>
+    <string name="takeAway">Take Away</string>
+
     <string-array name="mes">
         <item>1</item>
         <item>2</item>
