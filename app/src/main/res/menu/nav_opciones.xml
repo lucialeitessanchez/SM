@@ -17,7 +17,7 @@
             android:icon="@drawable/nuevoplat"
             />
         <item
-            android:title="@string/Pedido"
+            android:title="@string/NuevoPedido"
             android:id="@+id/menu_pedido"
             android:icon="@drawable/pedido"
             />

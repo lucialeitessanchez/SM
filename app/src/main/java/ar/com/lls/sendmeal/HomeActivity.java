@@ -55,6 +55,11 @@ public class HomeActivity extends AppCompatActivity {
                         i = new Intent(HomeActivity.this,ListaPlatos.class);
                         startActivity(i);
                         break;
+                    case(R.id.menu_pedido):
+                        // listar platos
+                        i = new Intent(HomeActivity.this,PedidoActivity.class);
+                        startActivity(i);
+                        break;
                     case(R.id.menu_informacion):
                         // tirar informacion de la aplicacion
                         i = new Intent(HomeActivity.this,HomeActivity.class);
