@@ -14,7 +14,7 @@
         android:id="@+id/ETEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/email" />
+        android:hint="@string/email"/>
 
     <TextView
         android:id="@+id/TVtakeAwayOenvio"
@@ -67,7 +67,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <EditText
@@ -75,28 +75,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="@string/direccion" />
+            android:hint="@string/direccion" />
 
         <EditText
             android:id="@+id/ETaltura"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:text="@string/altura" />
+            android:hint="@string/altura" />
 
         <EditText
             android:id="@+id/ETdpto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:text="@string/departamento" />
+            android:hint="@string/departamento" />
 
         <EditText
             android:id="@+id/ETpiso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:text="@string/piso" />
+            android:hint="@string/piso" />
     </LinearLayout>
 
 
@@ -104,8 +104,9 @@
         android:id="@+id/BTNencargarPlato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/encargarPlatos"
-        android:visibility="visible"></Button>
+        android:background="@color/colorPrimary"
+        android:text="@string/encargarPlatos" />
+
 
 
 </LinearLayout>

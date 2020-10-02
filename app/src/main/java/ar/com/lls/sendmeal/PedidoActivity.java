@@ -4,12 +4,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class PedidoActivity extends AppCompatActivity {
@@ -17,6 +19,7 @@ public class PedidoActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private EditText email, direccion, altura, piso, dpto;
     private TextView dondeEnviamos;
+    private RadioGroup takeAwayoNo;
     private RadioButton envioDomicilio,takeAway;
     private RadioButton casa, departamento;
     private Button verPlatos;
@@ -33,7 +36,6 @@ public class PedidoActivity extends AppCompatActivity {
         actionBar.setTitle(R.string.realizarPedido);
 
         email = findViewById(R.id.ETEmail);
-        email.getText().toString();
         envioDomicilio = findViewById(R.id.RBenvio);
         takeAway = findViewById(R.id.RBtakeAway);
         dondeEnviamos = findViewById(R.id.TVdondeEnviamos);
@@ -51,7 +53,6 @@ public class PedidoActivity extends AppCompatActivity {
         dpto = findViewById(R.id.ETdpto);
         dpto.setVisibility(View.GONE);
         verPlatos = findViewById(R.id.BTNencargarPlato);
-        verPlatos.setEnabled(false);
 
 
 
@@ -90,9 +91,13 @@ public class PedidoActivity extends AppCompatActivity {
             }
         });
 
-        if(!email.getText().toString().isEmpty() && takeAway.isChecked()){
-            verPlatos.setEnabled(true);
-        }
+        verPlatos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),ListaPlatos.class);
+                startActivityForResult(i,1);
+            }
+        });
 
     }
 }
