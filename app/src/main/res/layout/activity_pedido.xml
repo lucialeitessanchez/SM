@@ -107,6 +107,14 @@
         android:background="@color/colorPrimary"
         android:text="@string/encargarPlatos" />
 
+    <Button
+        android:id="@+id/BTNpediPlato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="@string/encargarPlatos" />
+
+
 
 
 </LinearLayout>

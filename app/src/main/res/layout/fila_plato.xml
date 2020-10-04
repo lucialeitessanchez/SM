@@ -64,12 +64,7 @@
                     android:layout_alignParentBottom="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:id="@+id/precioPlato" />
-                <Button
-                    android:id="@+id/BTNencargarPlato"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:text="¡¡¡ Pedir !!!" />
+
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
