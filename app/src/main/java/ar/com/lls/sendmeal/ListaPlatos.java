@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 
 import java.util.ArrayList;
@@ -17,12 +20,10 @@ import ar.com.lls.sendmeal.model.PlatoAdapter;
 
 public class ListaPlatos extends AppCompatActivity {
 
-    private ArrayList<Plato> listaPlato;
     private Toolbar toolbar;
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-
 
 
     @Override
@@ -63,5 +64,16 @@ public class ListaPlatos extends AppCompatActivity {
         adapter = new PlatoAdapter(listaItems);
         recycler.setAdapter(adapter);
         varPlato.inicializarPlatos(); // fijate esto si no como programarlo mejor
+
+        Bundle b = getIntent().getExtras();
+
+        if(b!=null){
+            //Pregunto si la clave que fue seteada en PedidoActivity
+            if(b.containsKey("desde pedidoActivity a ListaPlatos")){
+                //Mostrar botón "pedir" porque significa que ListaPlatos se llamó desde PedidoActivity
+
+                //Log.i("MI ACTIVITY", "El valor del check fue " + check);
+            }
+        }
     }
 }

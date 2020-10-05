@@ -22,7 +22,7 @@ public class PedidoActivity extends AppCompatActivity {
     private RadioGroup takeAwayoNo;
     private RadioButton envioDomicilio,takeAway;
     private RadioButton casa, departamento;
-    private Button encargarPlatos, pedirPlato;
+    private Button encargarPlatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +53,6 @@ public class PedidoActivity extends AppCompatActivity {
         dpto = findViewById(R.id.ETdpto);
         dpto.setVisibility(View.GONE);
         encargarPlatos = findViewById(R.id.BTNencargarPlato);
-        pedirPlato = findViewById(R.id.BTNpediPlato);
-        pedirPlato.setVisibility(View.GONE);
 
 
 
@@ -97,9 +95,11 @@ public class PedidoActivity extends AppCompatActivity {
         encargarPlatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int LAUNCH_SECOND_ACTIVITY = 1;
                 Intent i = new Intent(getApplicationContext(),ListaPlatos.class);
-                startActivityForResult(i,1);
+                //Seteo una key en el putExtra para referenciar desde qué actividad estoy llamando
+                i.putExtra("desde pedidoActivity a ListaPlatos", LAUNCH_SECOND_ACTIVITY);
+                startActivityForResult(i,LAUNCH_SECOND_ACTIVITY);
             }
         });
 

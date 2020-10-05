@@ -1,9 +1,11 @@
 package ar.com.lls.sendmeal.model;
 
 import android.nfc.cardemulation.CardEmulation;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import ar.com.lls.sendmeal.PedidoActivity;
 import ar.com.lls.sendmeal.R;
 
 public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHolder> {
@@ -25,21 +28,29 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         public TextView precio;
         public TextView descripcion;
         public CardView cardView;
+        public Button botonPedir;
 
         public PlatoViewHolder(View v) {
             super(v);
+            cardView = (CardView) v.findViewById(R.id.card_view); // pa k?
             imagen = (ImageView) v.findViewById(R.id.imagenPlato);
             titulo = (TextView) v.findViewById(R.id.tituloPlato);
             precio = (TextView) v.findViewById(R.id.precioPlato);
             descripcion = (TextView) v.findViewById(R.id.descripcionPlato);
-            cardView = (CardView) v.findViewById(R.id.card_view); // pa k?
+            botonPedir = v.findViewById(R.id.pedirPlato);
+
 
         }
+
     }
+
+
 
     public PlatoAdapter(List<Plato> items){
         this.items = items;
     }
+
+
 
     @NonNull
     @Override
