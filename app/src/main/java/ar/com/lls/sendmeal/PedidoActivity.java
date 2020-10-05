@@ -96,9 +96,11 @@ public class PedidoActivity extends AppCompatActivity {
         encargarPlatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                int LAUNCH_SECOND_ACTIVITY = 1;
                 Intent i = new Intent(getApplicationContext(),ListaPlatos.class);
-                startActivityForResult(i,1);
+                //Seteo una key en el putExtra para referenciar desde qué actividad estoy llamando
+                i.putExtra("desde pedidoActivity a ListaPlatos", LAUNCH_SECOND_ACTIVITY);
+                startActivityForResult(i,LAUNCH_SECOND_ACTIVITY);
             }
         });
 
