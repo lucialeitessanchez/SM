@@ -12,6 +12,8 @@
 
     <EditText
         android:id="@+id/ETEmail"
+        android:layout_marginLeft="@dimen/marginCard1"
+        android:layout_marginRight="@dimen/marginCard1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email"/>
@@ -20,6 +22,7 @@
         android:id="@+id/TVtakeAwayOenvio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/marginCard1"
         android:text="@string/tipoPedido" />
 
     <RadioGroup
@@ -45,6 +48,7 @@
         android:id="@+id/TVdondeEnviamos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/marginCard1"
         android:text="@string/dondeEnviamos" />
 
     <RadioGroup
@@ -68,6 +72,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/marginCard1"
         android:orientation="horizontal">
 
         <EditText
@@ -102,8 +107,17 @@
 
     <Button
         android:id="@+id/BTNencargarPlato"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/botonPedido"
+        android:layout_height="@dimen/botonPedido2"
+        android:layout_gravity="center"
         android:background="@color/colorPrimary"
+        style="@style/ShapeAppearance.MaterialComponents.MediumComponent"
+        android:textSize="20dp"
         android:text="@string/encargarPlatos" />
+
+
+
+
+
+
 </LinearLayout>

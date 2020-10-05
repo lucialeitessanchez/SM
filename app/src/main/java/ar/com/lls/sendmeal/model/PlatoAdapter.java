@@ -1,11 +1,10 @@
 package ar.com.lls.sendmeal.model;
 
 import android.nfc.cardemulation.CardEmulation;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,8 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ar.com.lls.sendmeal.PedidoActivity;
 import ar.com.lls.sendmeal.R;
+
+import static android.view.View.GONE;
 
 public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHolder> {
     private List<Plato> items;
@@ -28,29 +28,27 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         public TextView precio;
         public TextView descripcion;
         public CardView cardView;
-        public Button botonPedir;
+        public CheckedTextView cbSeleccionar;
+
 
         public PlatoViewHolder(View v) {
             super(v);
-            cardView = (CardView) v.findViewById(R.id.card_view); // pa k?
             imagen = (ImageView) v.findViewById(R.id.imagenPlato);
             titulo = (TextView) v.findViewById(R.id.tituloPlato);
             precio = (TextView) v.findViewById(R.id.precioPlato);
             descripcion = (TextView) v.findViewById(R.id.descripcionPlato);
-            botonPedir = v.findViewById(R.id.pedirPlato);
+            cardView = (CardView) v.findViewById(R.id.card_view); // pa k?
+            cbSeleccionar = (CheckedTextView) v.findViewById(R.id.cbPedir);
+
+            cbSeleccionar.setVisibility(GONE); //lo pongo invisible hasta no saber de donde viene
 
 
         }
-
     }
-
-
 
     public PlatoAdapter(List<Plato> items){
         this.items = items;
     }
-
-
 
     @NonNull
     @Override
