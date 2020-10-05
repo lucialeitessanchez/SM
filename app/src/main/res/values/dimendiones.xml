@@ -10,5 +10,6 @@
     <dimen name="IconoTulbar">60dp</dimen>
     <dimen name="topDescripcionPlato">60dp</dimen>
     <dimen name="marginCard1">10dp</dimen>
-
+    <dimen name="botonPedido">225dp</dimen>
+    <dimen name="botonPedido2">57dp</dimen>
 </resources>

@@ -64,6 +64,14 @@
                     android:layout_alignParentBottom="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:id="@+id/precioPlato" />
+                <CheckedTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cbPedir"
+                    android:text="@string/Seleccionar"
+                    android:layout_marginLeft="@dimen/botonPedido"
+                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+                    />
 
             </LinearLayout>
         </LinearLayout>

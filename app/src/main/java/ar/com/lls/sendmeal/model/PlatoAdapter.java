@@ -4,6 +4,7 @@ import android.nfc.cardemulation.CardEmulation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,8 @@ import java.util.List;
 
 import ar.com.lls.sendmeal.R;
 
+import static android.view.View.GONE;
+
 public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHolder> {
     private List<Plato> items;
 
@@ -25,6 +28,8 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         public TextView precio;
         public TextView descripcion;
         public CardView cardView;
+        public CheckedTextView cbSeleccionar;
+
 
         public PlatoViewHolder(View v) {
             super(v);
@@ -33,6 +38,10 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
             precio = (TextView) v.findViewById(R.id.precioPlato);
             descripcion = (TextView) v.findViewById(R.id.descripcionPlato);
             cardView = (CardView) v.findViewById(R.id.card_view); // pa k?
+            cbSeleccionar = (CheckedTextView) v.findViewById(R.id.cbPedir);
+
+            cbSeleccionar.setVisibility(GONE); //lo pongo invisible hasta no saber de donde viene
+
 
         }
     }

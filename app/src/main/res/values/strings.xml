@@ -36,10 +36,11 @@
     <string name="departamento">Departamento</string>
     <string name="piso">Piso</string>
     <string name="dondeEnviamos">¿A dónde lo enviamos?</string>
-    <string name="encargarPlatos">Encargar Platos</string>
+    <string name="encargarPlatos">Seleccionar Platos</string>
     <string name="realizarPedido">Realizar pedido</string>
     <string name="envioDomicilio">Envio a domicilio</string>
     <string name="takeAway">Take Away</string>
+    <string name="Seleccionar">Seleccionar</string>
 
     <string-array name="mes">
         <item>1</item>

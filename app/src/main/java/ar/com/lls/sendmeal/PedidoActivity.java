@@ -22,7 +22,7 @@ public class PedidoActivity extends AppCompatActivity {
     private RadioGroup takeAwayoNo;
     private RadioButton envioDomicilio,takeAway;
     private RadioButton casa, departamento;
-    private Button encargarPlatos, pedirPlato;
+    private Button encargarPlatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +53,7 @@ public class PedidoActivity extends AppCompatActivity {
         dpto = findViewById(R.id.ETdpto);
         dpto.setVisibility(View.GONE);
         encargarPlatos = findViewById(R.id.BTNencargarPlato);
-        pedirPlato = findViewById(R.id.BTNpediPlato);
-        pedirPlato.setVisibility(View.GONE);
+
 
 
 
