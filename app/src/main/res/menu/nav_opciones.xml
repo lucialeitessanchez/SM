@@ -19,7 +19,7 @@
         <item
             android:title="@string/NuevoPedido"
             android:id="@+id/menu_pedido"
-            android:icon="@drawable/pedido"
+            android:icon="@drawable/ic_pedido"
             />
 
         <item
