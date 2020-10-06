@@ -24,6 +24,7 @@ public class ListaPlatos extends AppCompatActivity {
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    public boolean s;
 
 
     @Override
@@ -58,22 +59,27 @@ public class ListaPlatos extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(layoutManager);
 
-        //Crea un nuevo adaptador
-        Plato varPlato = new Plato();
-        List<Plato> listaItems = varPlato.getListaPlatos();
-        adapter = new PlatoAdapter(listaItems);
-        recycler.setAdapter(adapter);
-        varPlato.inicializarPlatos(); // fijate esto si no como programarlo mejor
-
         Bundle b = getIntent().getExtras();
 
         if(b!=null){
             //Pregunto si la clave que fue seteada en PedidoActivity
             if(b.containsKey("desde pedidoActivity a ListaPlatos")){
                 //Mostrar botón "pedir" porque significa que ListaPlatos se llamó desde PedidoActivity
-
+                s=true;
                 //Log.i("MI ACTIVITY", "El valor del check fue " + check);
             }
         }
+
+
+        //Crea un nuevo adaptador
+        Plato varPlato = new Plato();
+        List<Plato> listaItems = varPlato.getListaPlatos();
+        adapter = new PlatoAdapter(listaItems,s);
+        recycler.setAdapter(adapter);
+        varPlato.inicializarPlatos(); // fijate esto si no como programarlo mejor
+
+
+
+
     }
 }

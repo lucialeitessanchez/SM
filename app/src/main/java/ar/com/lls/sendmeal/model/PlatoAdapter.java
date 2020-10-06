@@ -17,8 +17,10 @@ import java.util.List;
 import ar.com.lls.sendmeal.R;
 
 import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHolder> {
+    private final boolean s2;
     private List<Plato> items;
 
     public static class PlatoViewHolder extends RecyclerView.ViewHolder {
@@ -42,13 +44,23 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
 
             cbSeleccionar.setVisibility(GONE); //lo pongo invisible hasta no saber de donde viene
 
-
         }
     }
 
-    public PlatoAdapter(List<Plato> items){
+    public PlatoAdapter(List<Plato> items,boolean s){
         this.items = items;
+        this.s2 = s;
     }
+
+    public boolean funcion(){
+        if(s2){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
     @NonNull
     @Override
@@ -63,6 +75,11 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         holder.titulo.setText(items.get(position).getTitulo());
         holder.precio.setText("$"+items.get(position).getPrecio().toString()); //ojo hay que hacerlo string porque devuelve un entero
         holder.descripcion.setText(items.get(position).getDescripcion());
+
+
+        if(funcion()){
+            holder.cbSeleccionar.setVisibility(VISIBLE);
+        }
     }
 
     @Override
