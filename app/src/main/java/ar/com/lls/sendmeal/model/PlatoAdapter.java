@@ -20,7 +20,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHolder> {
-    private final boolean s2;
+    private final boolean fromPedidoActivity;
     private List<Plato> items;
 
     public static class PlatoViewHolder extends RecyclerView.ViewHolder {
@@ -39,7 +39,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
             titulo = (TextView) v.findViewById(R.id.tituloPlato);
             precio = (TextView) v.findViewById(R.id.precioPlato);
             descripcion = (TextView) v.findViewById(R.id.descripcionPlato);
-            cardView = (CardView) v.findViewById(R.id.card_view); // pa k?
+            cardView = (CardView) v.findViewById(R.id.card_view);
             cbSeleccionar = (CheckedTextView) v.findViewById(R.id.cbPedir);
 
             cbSeleccionar.setVisibility(GONE); //lo pongo invisible hasta no saber de donde viene
@@ -47,13 +47,13 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         }
     }
 
-    public PlatoAdapter(List<Plato> items,boolean s){
+    public PlatoAdapter(List<Plato> items, boolean desdePedidoActivityOno){
         this.items = items;
-        this.s2 = s;
+        this.fromPedidoActivity = desdePedidoActivityOno;
     }
 
     public boolean funcion(){
-        if(s2){
+        if(fromPedidoActivity){
             return true;
         }
         else{
