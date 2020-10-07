@@ -31,30 +31,6 @@ public class PedidoActivity extends AppCompatActivity {
 
     public static final int LAUNCH_LISTA_PLATOS_ACTIVITY = 1;
 
-
-    private String nombreDelPlato;
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Comprobamos si el resultado de la segunda actividad es "RESULT_CANCELED".
-        if(resultCode == RESULT_CANCELED){
-            // Si es así mostramos mensaje de cancelado por pantalla.
-            Toast.makeText(this, "Algo salio mal", Toast.LENGTH_SHORT)
-                    .show();            }
-            //¿Llamé a la activity ListaPlatos?
-           /* if(requestCode == LAUNCH_LISTA_PLATOS_ACTIVITY){
-                if(data.hasExtra("Nombre del plato")){
-                    nombreDelPlato = data.getExtras().getString("Nombre del plato");
-                }
-            }*/
-        else{ // De lo contrario, se agarra el resultado de la segunda actividad.
-            String platoSeleccionado = data.getExtras().getString(nombreDelPlato);
-            //aca hay que ir armando la lista
-            listaPlatosSeleccionados.add(platoSeleccionado);
-        }
-
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,5 +111,33 @@ public class PedidoActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Comprobamos si el resultado de la segunda actividad es "RESULT_CANCELED".
+        if(resultCode == RESULT_CANCELED){
+            // Si es así mostramos mensaje de cancelado por pantalla.
+            Toast.makeText(this, "Algo salio mal", Toast.LENGTH_SHORT)
+                    .show();            }
+        //¿Llamé a la activity ListaPlatos?
+           /* if(requestCode == LAUNCH_LISTA_PLATOS_ACTIVITY){
+                if(data.hasExtra("Nombre del plato")){
+                    nombreDelPlato = data.getExtras().getString("Nombre del plato");
+                }
+            }*/
+        else{ // De lo contrario, se agarra el resultado de la segunda actividad.
+            String platoSeleccionado;
+
+
+            platoSeleccionado = data.getExtras().getString("nombrePlato");
+            int precio = Integer.parseInt(data.getExtras().getString("precioPlato"));
+            //aca hay que ir armando la lista
+            listaPlatosSeleccionados.add(platoSeleccionado);
+            Toast.makeText(this,precio, Toast.LENGTH_SHORT)
+                    .show();
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

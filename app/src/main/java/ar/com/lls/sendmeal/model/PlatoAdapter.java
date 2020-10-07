@@ -99,11 +99,12 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
             @Override
             public void onClick(View view) {
                 Intent devolucion = new Intent();
-                String nombrePlato = (holder.titulo).toString();
-                Integer precioPlato = Integer.parseInt((holder.precio).toString());
-                devolucion.putExtra(nombrePlato,precioPlato);
+                String nombrePlato = holder.titulo.getText().toString();
+                String precioPlato= holder.precio.getText().toString();
 
-                miActivity.setResult(RESULT_OK  ,devolucion);
+                devolucion.putExtra("nombrePlato",nombrePlato);
+                devolucion.putExtra("precioPlato",precioPlato);
+                miActivity.setResult(RESULT_OK ,devolucion);
 
                 miActivity.finish();
 
