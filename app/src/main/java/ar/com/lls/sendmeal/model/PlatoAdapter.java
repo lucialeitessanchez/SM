@@ -38,6 +38,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         public CardView cardView;
         public CheckedTextView cbSeleccionar;
         private Activity listaPlato;
+        public ImageView imgSeleccionar;
 
 
         public PlatoViewHolder(View v) {
@@ -49,9 +50,10 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
             descripcion = (TextView) v.findViewById(R.id.descripcionPlato);
             cardView = (CardView) v.findViewById(R.id.card_view);
             cbSeleccionar = (CheckedTextView) v.findViewById(R.id.cbPedir);
+            imgSeleccionar = (ImageView) v.findViewById(R.id.imagenPlato);
 
-            cbSeleccionar.setVisibility(GONE); //lo pongo invisible hasta no saber de donde viene
-
+            cbSeleccionar.setVisibility(GONE); //los pongo invisible hasta no saber de donde viene
+            imgSeleccionar.setVisibility(GONE);
         }
     }
 
@@ -86,8 +88,9 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         holder.descripcion.setText(items.get(position).getDescripcion());
 
 
-        if(fueInvocadaDesdePedidoAct()){
+        if(fueInvocadaDesdePedidoAct()){  //se hacen visibles si vienen desde la clase pedido
             holder.cbSeleccionar.setVisibility(VISIBLE);
+            holder.imgSeleccionar.setVisibility(VISIBLE);
         }
 
         holder.cbSeleccionar.setOnClickListener(new View.OnClickListener() {

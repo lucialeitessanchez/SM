@@ -12,4 +12,5 @@
     <dimen name="marginCard1">10dp</dimen>
     <dimen name="botonPedido">225dp</dimen>
     <dimen name="botonPedido2">57dp</dimen>
+    <dimen name="imgSeleccionar">40dp</dimen>
 </resources>

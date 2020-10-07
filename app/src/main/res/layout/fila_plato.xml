@@ -78,9 +78,11 @@
                     style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
                     />
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/imgSeleccionar"
+                    android:layout_height="@dimen/imgSeleccionar"
                     android:src="@drawable/ic_agregar"
+                    android:id="@+id/imgSeleccionar"
+
                     />
                 </LinearLayout>
 
