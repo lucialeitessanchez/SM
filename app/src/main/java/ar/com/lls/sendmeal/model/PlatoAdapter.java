@@ -1,5 +1,7 @@
 package ar.com.lls.sendmeal.model;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.nfc.cardemulation.CardEmulation;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +16,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import ar.com.lls.sendmeal.ListaPlatos;
 import ar.com.lls.sendmeal.R;
 
+import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHolder> {
     private final boolean fromPedidoActivity;
     private List<Plato> items;
+    Activity miActivity;
+
 
     public static class PlatoViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos de un plato
@@ -31,10 +37,12 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         public TextView descripcion;
         public CardView cardView;
         public CheckedTextView cbSeleccionar;
+        private Activity listaPlato;
 
 
         public PlatoViewHolder(View v) {
             super(v);
+            this.listaPlato = listaPlato;
             imagen = (ImageView) v.findViewById(R.id.imagenPlato);
             titulo = (TextView) v.findViewById(R.id.tituloPlato);
             precio = (TextView) v.findViewById(R.id.precioPlato);
@@ -47,12 +55,13 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         }
     }
 
-    public PlatoAdapter(List<Plato> items, boolean desdePedidoActivityOno){
+    public PlatoAdapter(List<Plato> items, boolean desdePedidoActivityOno, Activity laActivity ){
         this.items = items;
         this.fromPedidoActivity = desdePedidoActivityOno;
+        this.miActivity = laActivity;
     }
 
-    public boolean funcion(){
+    public boolean fueInvocadaDesdePedidoAct(){
         if(fromPedidoActivity){
             return true;
         }
@@ -70,16 +79,42 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlatoAdapter.PlatoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final PlatoAdapter.PlatoViewHolder holder, int position) {
         //holder.imagen.setImageResource(items.get(position).getImagen()); por ahora no porque va la imagen para todos igual
         holder.titulo.setText(items.get(position).getTitulo());
         holder.precio.setText("$"+items.get(position).getPrecio().toString()); //ojo hay que hacerlo string porque devuelve un entero
         holder.descripcion.setText(items.get(position).getDescripcion());
 
 
-        if(funcion()){
+        if(fueInvocadaDesdePedidoAct()){
             holder.cbSeleccionar.setVisibility(VISIBLE);
         }
+
+        holder.cbSeleccionar.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View view) {
+                Intent devolucion = new Intent();
+                String nombrePlato = (holder.titulo).toString();
+                Integer precioPlato = Integer.parseInt((holder.precio).toString());
+                devolucion.putExtra("Nombre del plato", nombrePlato);
+                devolucion.putExtra("Valor del plato", precioPlato);
+
+                miActivity.setResult(RESULT_OK  ,devolucion);
+
+                miActivity.finish();
+
+
+            }
+        });
+
+        holder.cbSeleccionar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override

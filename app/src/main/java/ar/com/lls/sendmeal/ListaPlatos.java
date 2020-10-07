@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ public class ListaPlatos extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     public boolean desdePedidoActivity;
+    private Activity listaPlatoActivity = this;
 
 
     @Override
@@ -63,7 +65,7 @@ public class ListaPlatos extends AppCompatActivity {
         //Crea un nuevo adaptador
         Plato varPlato = new Plato();
         List<Plato> listaItems = varPlato.getListaPlatos();
-        adapter = new PlatoAdapter(listaItems,desdePedidoActivity);
+        adapter = new PlatoAdapter(listaItems,desdePedidoActivity,listaPlatoActivity);
         recycler.setAdapter(adapter);
         varPlato.inicializarPlatos();
 

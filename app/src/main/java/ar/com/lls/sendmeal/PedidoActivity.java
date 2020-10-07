@@ -1,5 +1,6 @@
 package ar.com.lls.sendmeal;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,6 +24,25 @@ public class PedidoActivity extends AppCompatActivity {
     private RadioButton envioDomicilio,takeAway;
     private RadioButton casa, departamento;
     private Button encargarPlatos;
+
+    public static final int LAUNCH_LISTA_PLATOS_ACTIVITY = 1;
+
+
+    private String nombreDelPlato;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //¿Devolvió RESULT_OK la actividad que llamé desde acá?
+        if(resultCode == RESULT_OK){
+            //¿Llamé a la activity ListaPlatos?
+            if(requestCode == LAUNCH_LISTA_PLATOS_ACTIVITY){
+                if(data.hasExtra("Nombre del plato")){
+                    nombreDelPlato = data.getExtras().getString("Nombre del plato");
+                }
+            }
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,13 +116,15 @@ public class PedidoActivity extends AppCompatActivity {
         encargarPlatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int LAUNCH_SECOND_ACTIVITY = 1;
+                //int LAUNCH_LISTA_PLATOS_ACTIVITY = 1;
                 Intent i = new Intent(getApplicationContext(),ListaPlatos.class);
                 //Seteo una key en el putExtra para referenciar desde qué actividad estoy llamando
-                i.putExtra("desde pedidoActivity a ListaPlatos", LAUNCH_SECOND_ACTIVITY);
-                startActivityForResult(i,LAUNCH_SECOND_ACTIVITY);
+                i.putExtra("desde pedidoActivity a ListaPlatos", LAUNCH_LISTA_PLATOS_ACTIVITY);
+                startActivityForResult(i,LAUNCH_LISTA_PLATOS_ACTIVITY);
             }
         });
+
+
 
     }
 }
