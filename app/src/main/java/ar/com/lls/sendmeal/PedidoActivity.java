@@ -14,6 +14,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class PedidoActivity extends AppCompatActivity {
 
@@ -24,23 +27,31 @@ public class PedidoActivity extends AppCompatActivity {
     private RadioButton envioDomicilio,takeAway;
     private RadioButton casa, departamento;
     private Button encargarPlatos;
+    public ArrayList<String> listaPlatosSeleccionados;
 
     public static final int LAUNCH_LISTA_PLATOS_ACTIVITY = 1;
 
 
     private String nombreDelPlato;
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        //¿Devolvió RESULT_OK la actividad que llamé desde acá?
-        if(resultCode == RESULT_OK){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Comprobamos si el resultado de la segunda actividad es "RESULT_CANCELED".
+        if(resultCode == RESULT_CANCELED){
+            // Si es así mostramos mensaje de cancelado por pantalla.
+            Toast.makeText(this, "Algo salio mal", Toast.LENGTH_SHORT)
+                    .show();            }
             //¿Llamé a la activity ListaPlatos?
-            if(requestCode == LAUNCH_LISTA_PLATOS_ACTIVITY){
+           /* if(requestCode == LAUNCH_LISTA_PLATOS_ACTIVITY){
                 if(data.hasExtra("Nombre del plato")){
                     nombreDelPlato = data.getExtras().getString("Nombre del plato");
                 }
-            }
-
+            }*/
+        else{ // De lo contrario, se agarra el resultado de la segunda actividad.
+            String platoSeleccionado = data.getExtras().getString(nombreDelPlato);
+            //aca hay que ir armando la lista
+            listaPlatosSeleccionados.add(platoSeleccionado);
         }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -73,8 +84,6 @@ public class PedidoActivity extends AppCompatActivity {
         dpto = findViewById(R.id.ETdpto);
         dpto.setVisibility(View.GONE);
         encargarPlatos = findViewById(R.id.BTNencargarPlato);
-
-
 
 
 

@@ -101,8 +101,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
                 Intent devolucion = new Intent();
                 String nombrePlato = (holder.titulo).toString();
                 Integer precioPlato = Integer.parseInt((holder.precio).toString());
-                devolucion.putExtra("Nombre del plato", nombrePlato);
-                devolucion.putExtra("Valor del plato", precioPlato);
+                devolucion.putExtra(nombrePlato,precioPlato);
 
                 miActivity.setResult(RESULT_OK  ,devolucion);
 
@@ -112,12 +111,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
             }
         });
 
-        holder.cbSeleccionar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
     }
 
     @Override
