@@ -131,11 +131,11 @@ public class PedidoActivity extends AppCompatActivity {
 
 
             platoSeleccionado = data.getExtras().getString("nombrePlato");
-            int precio = Integer.parseInt(data.getExtras().getString("precioPlato"));
+            Double precioSeleccionado = (data.getExtras().getDouble("precioPlato"));
+
             //aca hay que ir armando la lista
             listaPlatosSeleccionados.add(platoSeleccionado);
-            Toast.makeText(this,precio, Toast.LENGTH_SHORT)
-                    .show();
+
         }
 
         super.onActivityResult(requestCode, resultCode, data);
