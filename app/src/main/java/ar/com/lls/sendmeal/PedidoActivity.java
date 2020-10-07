@@ -27,7 +27,8 @@ public class PedidoActivity extends AppCompatActivity {
     private RadioButton envioDomicilio,takeAway;
     private RadioButton casa, departamento;
     private Button encargarPlatos;
-    public ArrayList<String> listaPlatosSeleccionados;
+    public ArrayList<String> listaPlatosSeleccionados = new ArrayList<>();
+    public Double totalPedido;
 
     public static final int LAUNCH_LISTA_PLATOS_ACTIVITY = 1;
 
@@ -60,7 +61,7 @@ public class PedidoActivity extends AppCompatActivity {
         dpto = findViewById(R.id.ETdpto);
         dpto.setVisibility(View.GONE);
         encargarPlatos = findViewById(R.id.BTNencargarPlato);
-
+        totalPedido = 0.0;
 
 
 
@@ -115,28 +116,23 @@ public class PedidoActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Comprobamos si el resultado de la segunda actividad es "RESULT_CANCELED".
-        if(resultCode == RESULT_CANCELED){
-            // Si es así mostramos mensaje de cancelado por pantalla.
-            Toast.makeText(this, "Algo salio mal", Toast.LENGTH_SHORT)
-                    .show();            }
-        //¿Llamé a la activity ListaPlatos?
-           /* if(requestCode == LAUNCH_LISTA_PLATOS_ACTIVITY){
-                if(data.hasExtra("Nombre del plato")){
-                    nombreDelPlato = data.getExtras().getString("Nombre del plato");
-                }
-            }*/
-        else{ // De lo contrario, se agarra el resultado de la segunda actividad.
+        // Comprobamos si el resultado de la segunda actividad es "RESULT_ok",entonces se agarra el resultado de la segunda actividad.
+        if(resultCode == RESULT_OK){
             String platoSeleccionado;
 
-
-            platoSeleccionado = data.getExtras().getString("nombrePlato");
+            platoSeleccionado = data.getExtras().getString("nombrePlato"); //trae el nombre y el precio desde la actividad plato adapter
             Double precioSeleccionado = (data.getExtras().getDouble("precioPlato"));
 
-            //aca hay que ir armando la lista
+            //aca hay que ir armando la lista y la suma de los precios
             listaPlatosSeleccionados.add(platoSeleccionado);
+            totalPedido = totalPedido+precioSeleccionado;
 
-        }
+                                        }
+
+        else{
+           // Si es así mostramos mensaje de cancelado por pantalla.
+            Toast.makeText(this, "Algo salio mal", Toast.LENGTH_SHORT).show();
+           }
 
         super.onActivityResult(requestCode, resultCode, data);
     }

@@ -44,7 +44,6 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
 
         public PlatoViewHolder(View v) {
             super(v);
-            this.listaPlato = listaPlato;
             imagen = (ImageView) v.findViewById(R.id.imagenPlato);
             titulo = (TextView) v.findViewById(R.id.tituloPlato);
             precio = (TextView) v.findViewById(R.id.precioPlato);
@@ -88,7 +87,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         holder.precio.setText("$"+items.get(position).getPrecio().toString()); //ojo hay que hacerlo string porque devuelve un entero
         holder.descripcion.setText(items.get(position).getDescripcion());
 
-        final Double precioPlatoSeleccionado = items.get(position).getPrecio();
+        final Double precioPlatoSeleccionado = items.get(position).getPrecio(); //guardo directamente el valor del double
 
         if(fueInvocadaDesdePedidoAct()){  //se hacen visibles si vienen desde la clase pedido
             holder.cbSeleccionar.setVisibility(VISIBLE);
@@ -101,7 +100,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
             @Override
             public void onClick(View view) {
                 Intent devolucion = new Intent();
-                String nombrePlato = holder.titulo.getText().toString();
+                String nombrePlato = holder.titulo.getText().toString(); //se guarda el nombre como un textView
 
 
                 devolucion.putExtra("nombrePlato",nombrePlato);
