@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -28,11 +30,14 @@ public class PedidoActivity extends AppCompatActivity {
     private RadioGroup takeAwayoNo;
     private RadioButton envioDomicilio,takeAway;
     private RadioButton casa, departamento;
-    private Button encargarPlatos;
-    public ArrayList<String> listaPlatosSeleccionados = new ArrayList<>();
-    public Double totalPedido;
+    private Button encargarPlatos,finalizarPedido;
     private ListView vistaPlatosEncargados;
     private TextView montoTotal;
+
+    public ArrayList<String> listaPlatosSeleccionados = new ArrayList<>();
+    public Double totalPedido;
+
+    private ProgressBar progressBarPedido;
 
     public static final int LAUNCH_LISTA_PLATOS_ACTIVITY = 1;
 
@@ -51,26 +56,31 @@ public class PedidoActivity extends AppCompatActivity {
         envioDomicilio = findViewById(R.id.RBenvio);
         takeAway = findViewById(R.id.RBtakeAway);
         dondeEnviamos = findViewById(R.id.TVdondeEnviamos);
-        dondeEnviamos.setVisibility(View.GONE);
         casa = findViewById(R.id.RBcasa);
-        casa.setVisibility(View.GONE);
         departamento = findViewById(R.id.RBdepartamento);
-        departamento.setVisibility(View.GONE);
         direccion = findViewById(R.id.ETdireccion);
-        direccion.setVisibility(View.GONE);
         altura = findViewById(R.id.ETaltura);
-        altura.setVisibility(View.GONE);
         piso = findViewById(R.id.ETpiso);
-        piso.setVisibility(View.GONE);
         dpto = findViewById(R.id.ETdpto);
-        dpto.setVisibility(View.GONE);
         encargarPlatos = findViewById(R.id.BTNencargarPlato);
-        totalPedido = 0.0;
         vistaPlatosEncargados = findViewById(R.id.LVplatosEncargados);
-        vistaPlatosEncargados.setVisibility(View.GONE);
         montoTotal = findViewById(R.id.montoTotal);
-        montoTotal.setVisibility(View.GONE);
+        finalizarPedido = (Button) findViewById(R.id.finalizarPedido);
+        progressBarPedido = (ProgressBar) findViewById(R.id.progressBarPedido);
 
+        totalPedido = 0.0; //La sumatoria del total del pedido
+
+        casa.setVisibility(View.GONE);
+        dondeEnviamos.setVisibility(View.GONE);
+        vistaPlatosEncargados.setVisibility(View.GONE);
+        montoTotal.setVisibility(View.GONE);
+        departamento.setVisibility(View.GONE);
+        piso.setVisibility(View.GONE);
+        altura.setVisibility(View.GONE);
+        direccion.setVisibility(View.GONE);
+        dpto.setVisibility(View.GONE);
+        finalizarPedido.setVisibility(View.GONE);
+        progressBarPedido.setVisibility(View.GONE);
 
         envioDomicilio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -115,7 +125,7 @@ public class PedidoActivity extends AppCompatActivity {
                 i.putExtra("desde pedidoActivity a ListaPlatos", LAUNCH_LISTA_PLATOS_ACTIVITY);
                 startActivityForResult(i,LAUNCH_LISTA_PLATOS_ACTIVITY);
                 vistaPlatosEncargados.setVisibility(View.VISIBLE);
-                montoTotal.setVisibility(View.VISIBLE);
+
             }
         });
 
@@ -136,11 +146,21 @@ public class PedidoActivity extends AppCompatActivity {
             listaPlatosSeleccionados.add(platoSeleccionado);
             totalPedido = totalPedido+precioSeleccionado;
 
+            montoTotal.setVisibility(View.VISIBLE);
             montoTotal.setText("Total: $" + totalPedido.toString());
 
 
             ArrayAdapter<String> adapterPedido = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,listaPlatosSeleccionados);
             vistaPlatosEncargados.setAdapter(adapterPedido);
+            //una vez que cargo al menos un plato ya hago visible el boton de finalizar pedido
+
+            finalizarPedido.setVisibility(View.VISIBLE);
+            finalizarPedido.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new Task().execute(listaPlatosSeleccionados.toString());
+                }
+            });
 
         }
 
@@ -150,5 +170,34 @@ public class PedidoActivity extends AppCompatActivity {
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    class Task extends AsyncTask<String,Void,String>{
+        @Override
+        protected void onPreExecute() {
+           progressBarPedido.setVisibility(View.VISIBLE);
+           finalizarPedido.setEnabled(false);
+
+        }
+
+    // para despues no se si se usa o no, pero la clase que recibe el "pedido" toma el pedido mediante String pedido = getIntent().getStringExtra("laclavepedido");
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                Thread.sleep(5000);
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+
+            return  strings[0];
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            progressBarPedido.setVisibility(View.INVISIBLE);
+            finalizarPedido.setEnabled(true);
+            //aca tengo que llamar a la notificacion
+        }
     }
 }
