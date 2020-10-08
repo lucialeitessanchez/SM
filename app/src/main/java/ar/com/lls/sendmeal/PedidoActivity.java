@@ -8,9 +8,11 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -29,6 +31,8 @@ public class PedidoActivity extends AppCompatActivity {
     private Button encargarPlatos;
     public ArrayList<String> listaPlatosSeleccionados = new ArrayList<>();
     public Double totalPedido;
+    private ListView vistaPlatosEncargados;
+    private TextView montoTotal;
 
     public static final int LAUNCH_LISTA_PLATOS_ACTIVITY = 1;
 
@@ -62,7 +66,10 @@ public class PedidoActivity extends AppCompatActivity {
         dpto.setVisibility(View.GONE);
         encargarPlatos = findViewById(R.id.BTNencargarPlato);
         totalPedido = 0.0;
-
+        vistaPlatosEncargados = findViewById(R.id.LVplatosEncargados);
+        vistaPlatosEncargados.setVisibility(View.GONE);
+        montoTotal = findViewById(R.id.montoTotal);
+        montoTotal.setVisibility(View.GONE);
 
 
         envioDomicilio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -107,6 +114,8 @@ public class PedidoActivity extends AppCompatActivity {
                 //Seteo una key en el putExtra para referenciar desde qué actividad estoy llamando
                 i.putExtra("desde pedidoActivity a ListaPlatos", LAUNCH_LISTA_PLATOS_ACTIVITY);
                 startActivityForResult(i,LAUNCH_LISTA_PLATOS_ACTIVITY);
+                vistaPlatosEncargados.setVisibility(View.VISIBLE);
+                montoTotal.setVisibility(View.VISIBLE);
             }
         });
 
@@ -127,12 +136,18 @@ public class PedidoActivity extends AppCompatActivity {
             listaPlatosSeleccionados.add(platoSeleccionado);
             totalPedido = totalPedido+precioSeleccionado;
 
-                                        }
+            montoTotal.setText("Total: $" + totalPedido.toString());
+
+
+            ArrayAdapter<String> adapterPedido = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,listaPlatosSeleccionados);
+            vistaPlatosEncargados.setAdapter(adapterPedido);
+
+        }
 
         else{
            // Si es así mostramos mensaje de cancelado por pantalla.
             Toast.makeText(this, "Algo salio mal", Toast.LENGTH_SHORT).show();
-           }
+        }
 
         super.onActivityResult(requestCode, resultCode, data);
     }

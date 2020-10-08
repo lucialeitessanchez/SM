@@ -41,6 +41,7 @@
     <string name="envioDomicilio">Envio a domicilio</string>
     <string name="takeAway">Take Away</string>
     <string name="Seleccionar">Seleccionar</string>
+    <string name="montoTotal">El monto total es: </string>
 
     <string-array name="mes">
         <item>1</item>

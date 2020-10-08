@@ -50,7 +50,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
             descripcion = (TextView) v.findViewById(R.id.descripcionPlato);
             cardView = (CardView) v.findViewById(R.id.card_view);
             cbSeleccionar = (CheckedTextView) v.findViewById(R.id.cbPedir);
-            imgSeleccionar = (ImageView) v.findViewById(R.id.imagenPlato);
+            imgSeleccionar = (ImageView) v.findViewById(R.id.imgSeleccionar);
 
             cbSeleccionar.setVisibility(GONE); //los pongo invisible hasta no saber de donde viene
             imgSeleccionar.setVisibility(GONE);
@@ -95,21 +95,16 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         }
 
         holder.cbSeleccionar.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View view) {
                 Intent devolucion = new Intent();
                 String nombrePlato = holder.titulo.getText().toString(); //se guarda el nombre como un textView
-
 
                 devolucion.putExtra("nombrePlato",nombrePlato);
                 devolucion.putExtra("precioPlato",precioPlatoSeleccionado);
                 miActivity.setResult(RESULT_OK ,devolucion);
 
                 miActivity.finish();
-
-
             }
         });
 
