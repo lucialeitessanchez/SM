@@ -46,7 +46,7 @@ public class PedidoActivity extends AppCompatActivity {
 
     private ProgressBar progressBarPedido;
     private final static String CHANNEL_ID = "NOTIFICACION";
-    private final static int NOTIFICACION_ID = 0;
+    private final static int NOTIFICACION_ID = 1;
 
 
 
@@ -219,10 +219,10 @@ public class PedidoActivity extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(String s) {
+
             progressBarPedido.setVisibility(View.INVISIBLE);
             finalizarPedido.setEnabled(true);
-            //aca tengo que llamar a la notificacion
-
+            //borrar todo el pedido, volver a 0
 
             Intent intent = new Intent();
             intent.setAction("ar.com.lls.senmeal.model.NotificacionPedido");

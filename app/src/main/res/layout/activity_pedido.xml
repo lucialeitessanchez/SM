@@ -122,10 +122,10 @@
         android:textSize="20dp"
         android:text="@string/encargarPlatos" />
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/LVplatosEncargados"/>
+            <ListView
+                android:id="@+id/LVplatosEncargados"
+                android:layout_width="wrap_content"
+                android:layout_height="320dp" />
         <TextView
             android:id="@+id/montoTotal"
             android:layout_width="wrap_content"
@@ -135,20 +135,19 @@
             android:text="@string/montoTotal"
             android:textSize="@dimen/topTarjeta"
          />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/FinalizarPedido"
-                android:id="@+id/finalizarPedido"
-                android:layout_gravity="center"/>
-
-            <ProgressBar
-                android:id="@+id/progressBarPedido"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
         </LinearLayout>
     </ScrollView>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/FinalizarPedido"
+        android:id="@+id/finalizarPedido"
+        android:layout_gravity="center"/>
+    <ProgressBar
+        android:id="@+id/progressBarPedido"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
