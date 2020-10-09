@@ -99,13 +99,11 @@ public class PedidoActivity extends AppCompatActivity {
         direccion.setVisibility(View.GONE);
         dpto.setVisibility(View.GONE);
         finalizarPedido.setVisibility(View.GONE);
-        finalizarPedido.setEnabled(false);
+        encargarPlatos.setEnabled(false);
         progressBarPedido.setVisibility(View.GONE);
 
-        if(!(email.toString().isEmpty()) && takeAway.isChecked()){
-            encargarPlatos.setEnabled(true);
-        }
-        else if(!(email.toString().isEmpty())) {
+
+
             envioDomicilio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -125,6 +123,9 @@ public class PedidoActivity extends AppCompatActivity {
                                     if (validarCampos(2)) {
                                         encargarPlatos.setEnabled(true);
                                     }
+                                    else{
+                                        encargarPlatos.setEnabled(false);
+                                    }
                                 } else {
                                     piso.setVisibility(View.GONE);
                                     dpto.setVisibility(View.GONE);
@@ -141,10 +142,18 @@ public class PedidoActivity extends AppCompatActivity {
                         departamento.setVisibility(View.GONE);
                         direccion.setVisibility(View.GONE);
                         altura.setVisibility(View.GONE);
+                        if(!email.toString().isEmpty()){
+                            encargarPlatos.setEnabled(true);
+                        }
+                        else {
+                            encargarPlatos.setEnabled(false);
+                        }
                     }
                 }
             });
-                    }
+        if(!(email.toString().isEmpty()) && takeAway.isChecked()){
+            encargarPlatos.setEnabled(true);
+        }
         encargarPlatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -251,6 +260,12 @@ public class PedidoActivity extends AppCompatActivity {
             return false;
         }
         if(valor == 2){
+            if(direccion.toString().isEmpty()){
+                return false;
+            }
+            if(altura.toString().isEmpty()){
+                return false;
+            }
             if(dpto.toString().isEmpty()){
                 return false;
             }
