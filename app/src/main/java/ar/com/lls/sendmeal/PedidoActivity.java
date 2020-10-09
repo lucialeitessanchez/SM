@@ -14,6 +14,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -99,76 +100,86 @@ public class PedidoActivity extends AppCompatActivity {
         direccion.setVisibility(View.GONE);
         dpto.setVisibility(View.GONE);
         finalizarPedido.setVisibility(View.GONE);
-        encargarPlatos.setEnabled(false);
         progressBarPedido.setVisibility(View.GONE);
 
 
-
-            envioDomicilio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (envioDomicilio.isChecked()) {
-                        dondeEnviamos.setVisibility(View.VISIBLE);
-                        casa.setVisibility(View.VISIBLE);
-                        departamento.setVisibility(View.VISIBLE);
-                        direccion.setVisibility(View.VISIBLE);
-                        altura.setVisibility(View.VISIBLE);
-
-                        departamento.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                            @Override
-                            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                                if (departamento.isChecked()) {
-                                    piso.setVisibility(View.VISIBLE);
-                                    dpto.setVisibility(View.VISIBLE);
-                                    if (validarCampos(2)) {
-                                        encargarPlatos.setEnabled(true);
-                                    }
-                                    else{
-                                        encargarPlatos.setEnabled(false);
-                                    }
-                                } else {
-                                    piso.setVisibility(View.GONE);
-                                    dpto.setVisibility(View.GONE);
-                                    if (validarCampos(1)) {
-                                        encargarPlatos.setEnabled(true);
-                                    }
-                                }
-                            }
-                        });
-
-                    } else {
-                        dondeEnviamos.setVisibility(View.GONE);
-                        casa.setVisibility(View.GONE);
-                        departamento.setVisibility(View.GONE);
-                        direccion.setVisibility(View.GONE);
-                        altura.setVisibility(View.GONE);
-                        if(!email.toString().isEmpty()){
-                            encargarPlatos.setEnabled(true);
-                        }
-                        else {
-                            encargarPlatos.setEnabled(false);
-                        }
-                    }
-                }
-            });
-        if(!(email.toString().isEmpty()) && takeAway.isChecked()){
-            encargarPlatos.setEnabled(true);
-        }
-        encargarPlatos.setOnClickListener(new View.OnClickListener() {
+        envioDomicilio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                //int LAUNCH_LISTA_PLATOS_ACTIVITY = 1;
-                Intent i = new Intent(getApplicationContext(),ListaPlatos.class);
-                //Seteo una key en el putExtra para referenciar desde qué actividad estoy llamando
-                i.putExtra("desde pedidoActivity a ListaPlatos", LAUNCH_LISTA_PLATOS_ACTIVITY);
-                startActivityForResult(i,LAUNCH_LISTA_PLATOS_ACTIVITY);
-                vistaPlatosEncargados.setVisibility(View.VISIBLE);
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (envioDomicilio.isChecked()) {
+                    dondeEnviamos.setVisibility(View.VISIBLE);
+                    casa.setVisibility(View.VISIBLE);
+                    departamento.setVisibility(View.VISIBLE);
+                    direccion.setVisibility(View.VISIBLE);
+                    altura.setVisibility(View.VISIBLE);
 
+                    departamento.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                            if (departamento.isChecked()) {
+                                piso.setVisibility(View.VISIBLE);
+                                dpto.setVisibility(View.VISIBLE);
+
+                            } else {
+                                piso.setVisibility(View.GONE);
+                                dpto.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+
+                } else {
+                    dondeEnviamos.setVisibility(View.GONE);
+                    casa.setVisibility(View.GONE);
+                    departamento.setVisibility(View.GONE);
+                    direccion.setVisibility(View.GONE);
+                    altura.setVisibility(View.GONE);
+                }
             }
         });
 
+        encargarPlatos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(validacionOk()) {
+                    //int LAUNCH_LISTA_PLATOS_ACTIVITY = 1;
+                    Intent i = new Intent(getApplicationContext(), ListaPlatos.class);
+                    //Seteo una key en el putExtra para referenciar desde qué actividad estoy llamando
+                    i.putExtra("desde pedidoActivity a ListaPlatos", LAUNCH_LISTA_PLATOS_ACTIVITY);
+                    startActivityForResult(i, LAUNCH_LISTA_PLATOS_ACTIVITY);
+                    vistaPlatosEncargados.setVisibility(View.VISIBLE);
+                }
+                else {
+                    Toast.makeText(PedidoActivity.this, "error en los datos ingresados", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
 
-
+    private boolean validacionOk() {
+        if(takeAway.isChecked()){
+            if(email.getText().toString().isEmpty()){
+                return false;
+            }
+        }
+        else {
+            if (email.getText().toString().isEmpty()) {
+                return false;
+            }
+            else {
+                if (casa.isChecked()) {
+                    if (direccion.getText().toString().isEmpty() || altura.getText().toString().isEmpty()) {
+                        return false;
+                    }
+                } else {
+                    if (departamento.isChecked()) {
+                        if (direccion.getText().toString().isEmpty() || altura.getText().toString().isEmpty() || dpto.getText().toString().isEmpty() || altura.getText().toString().isEmpty()) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     @Override
@@ -216,13 +227,13 @@ public class PedidoActivity extends AppCompatActivity {
         protected void onPreExecute() {
            progressBarPedido.setVisibility(View.VISIBLE);
            finalizarPedido.setEnabled(false);
-                                        }
+        }
 
         Context ctx;
 
         Task(Context ctx) { //este es el constructor le seteo el contexto para la notificacion
         this.ctx= ctx;
-                         }
+        }
         // para despues no se si se usa o no, pero la clase que recibe el "pedido" toma el pedido mediante String pedido = getIntent().getStringExtra("laclavepedido");
 
         @Override
@@ -232,7 +243,7 @@ public class PedidoActivity extends AppCompatActivity {
             }
             catch (InterruptedException e){
                 e.printStackTrace();
-                                        }
+            }
 
             return  strings[0];
         }
@@ -247,32 +258,6 @@ public class PedidoActivity extends AppCompatActivity {
 
             Intent intent2 = new Intent(PedidoActivity.this,PedidoActivity.class);
             startActivity(intent2);
-
-                                                 }
-    }
-
-
-    public boolean validarCampos(int valor){
-        if(direccion.toString().isEmpty()){
-            return false;
         }
-        if(altura.toString().isEmpty()){
-            return false;
-        }
-        if(valor == 2){
-            if(direccion.toString().isEmpty()){
-                return false;
-            }
-            if(altura.toString().isEmpty()){
-                return false;
-            }
-            if(dpto.toString().isEmpty()){
-                return false;
-            }
-            if(piso.toString().isEmpty()){
-                return false;
-            }
-        }
-        return true;
     }
 }
