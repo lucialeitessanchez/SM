@@ -7,7 +7,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 
 import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import ar.com.lls.sendmeal.model.NotificacionPedido;
 
 public class PedidoActivity extends AppCompatActivity {
 
@@ -205,10 +210,6 @@ public class PedidoActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try{
                 Thread.sleep(5000);
-                Intent i = new Intent();
-                i.setAction("NOTIFICACION");
-
-                sendBroadcast(i);
             }
             catch (InterruptedException e){
                 e.printStackTrace();
@@ -221,6 +222,11 @@ public class PedidoActivity extends AppCompatActivity {
             progressBarPedido.setVisibility(View.INVISIBLE);
             finalizarPedido.setEnabled(true);
             //aca tengo que llamar a la notificacion
+
+
+            Intent intent = new Intent();
+            intent.setAction("ar.com.lls.senmeal.model.NotificacionPedido");
+            sendBroadcast(intent);
 
         }
     }
