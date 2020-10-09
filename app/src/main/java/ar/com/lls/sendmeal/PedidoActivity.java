@@ -4,7 +4,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,6 +40,17 @@ public class PedidoActivity extends AppCompatActivity {
     public Double totalPedido;
 
     private ProgressBar progressBarPedido;
+    private final static String CHANNEL_ID = "NOTIFICACION";
+    private final static int NOTIFICACION_ID = 0;
+
+
+
+
+    /*int icono = R.mipmap.ic_launcher;
+    Intent intent = new Intent(MainActivity.this, MensajeActivity.class);
+    PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0,intent, 0);   Activity, llamado MensajeActivity y que será el Activity que se lance cuando el usuario haga click en la notificación*/
+
+
 
     public static final int LAUNCH_LISTA_PLATOS_ACTIVITY = 1;
 
@@ -81,6 +94,11 @@ public class PedidoActivity extends AppCompatActivity {
         dpto.setVisibility(View.GONE);
         finalizarPedido.setVisibility(View.GONE);
         progressBarPedido.setVisibility(View.GONE);
+
+
+
+
+
 
         envioDomicilio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -159,6 +177,7 @@ public class PedidoActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     new Task().execute(listaPlatosSeleccionados.toString());
+
                 }
             });
 
@@ -186,6 +205,10 @@ public class PedidoActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try{
                 Thread.sleep(5000);
+                Intent i = new Intent();
+                i.setAction("NOTIFICACION");
+
+                sendBroadcast(i);
             }
             catch (InterruptedException e){
                 e.printStackTrace();
@@ -198,6 +221,7 @@ public class PedidoActivity extends AppCompatActivity {
             progressBarPedido.setVisibility(View.INVISIBLE);
             finalizarPedido.setEnabled(true);
             //aca tengo que llamar a la notificacion
+
         }
     }
 }
