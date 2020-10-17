@@ -1,11 +1,14 @@
 package ar.com.lls.sendmeal.model;
 
+import androidx.room.PrimaryKey;
+import androidx.room.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Pedido {
-    @PrimaryKey ( autoGenerate  =  true )
+    @PrimaryKey( autoGenerate  =  true )
     Long id;
 
     public static List<Plato> listaPlatos = new ArrayList<>();
