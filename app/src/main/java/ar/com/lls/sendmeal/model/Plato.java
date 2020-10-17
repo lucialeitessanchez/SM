@@ -21,7 +21,6 @@ public class Plato {
     public static List<Plato> listaPlatos = new ArrayList<>();
 
     //construct
-
     public Plato(String titulo, String descripcion, Double precio, Integer calorias){
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -37,8 +36,6 @@ public class Plato {
         this.precio = precio;
         this.calorias = calorias;
     }
-
-
 
     public void cargarDatosPlato(String titulo,String descripcion, Double precio, Integer calorias) {
 

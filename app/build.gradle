@@ -40,4 +40,8 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$rootProject.2.2.5'"
     androidTestImplementation "androidx.room:room-testing:$rootProject.2.2.5'"
 
+    //Retrofit component
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
 }
