@@ -21,6 +21,15 @@ public class Plato {
     public static List<Plato> listaPlatos = new ArrayList<>();
 
     //construct
+
+    public Plato(String titulo, String descripcion, Double precio, Integer calorias){
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.calorias = calorias;
+    }
+
+
     public Plato(Long id,String titulo, String descripcion, Double precio, Integer calorias) {
         this.id = id;
         this.titulo = titulo;
@@ -29,9 +38,7 @@ public class Plato {
         this.calorias = calorias;
     }
 
-    public Plato(){
 
-    }
 
     public void cargarDatosPlato(String titulo,String descripcion, Double precio, Integer calorias) {
 
@@ -106,11 +113,11 @@ public class Plato {
     //no se si esto es necesario o no encuanto a lo que genera automaticamente room
     public Long inicializarID(){
         Random aleatorio = new Random(System.currentTimeMillis());
-// Producir nuevo long
+        // Producir nuevo long
         Long aletorio = aleatorio.nextLong();
-// Refrescar datos aleatorios 
+        // Refrescar datos aleatorios
         aleatorio.setSeed(System.currentTimeMillis());
         return aletorio;
-                                }
+    }
 
 }

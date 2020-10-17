@@ -57,22 +57,22 @@ public class PlatoActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(validarCamposPlato()){
-                tituloPlatoStr = tituloPlato.getText().toString();
-                descripcionPlatoStr = descripcionPlato.getText().toString();
-                precioPlatoD = Double.parseDouble(precioPlato.getText().toString());
-                caloriasPlatoInt = Integer.parseInt(caloriasPlato.getText().toString());
+                    tituloPlatoStr = tituloPlato.getText().toString();
+                    descripcionPlatoStr = descripcionPlato.getText().toString();
+                    precioPlatoD = Double.parseDouble(precioPlato.getText().toString());
+                    caloriasPlatoInt = Integer.parseInt(caloriasPlato.getText().toString());
 
-                Plato platoCreado = new Plato(tituloPlatoStr,descripcionPlatoStr,precioPlatoD,caloriasPlatoInt);
-                Plato.listaPlatos.add(platoCreado);
-                Toast.makeText(PlatoActivity.this,"El plato ingresado, se ha guardado correctamente",Toast.LENGTH_LONG).show();
-                //limpio para que pueda ingresar otro nuevo plato si quiere
-                tituloPlato.setText("");
-                descripcionPlato.setText("");
-                precioPlato.setText("");
-                caloriasPlato.setText("");
+                    Plato platoCreado = new Plato(tituloPlatoStr,descripcionPlatoStr,precioPlatoD,caloriasPlatoInt);
+                    Plato.listaPlatos.add(platoCreado);
+                    Toast.makeText(PlatoActivity.this,"El plato ingresado, se ha guardado correctamente",Toast.LENGTH_LONG).show();
+                    //limpio para que pueda ingresar otro nuevo plato si quiere
+                    tituloPlato.setText("");
+                    descripcionPlato.setText("");
+                    precioPlato.setText("");
+                    caloriasPlato.setText("");
                 }
-            else{
-                Toast.makeText(PlatoActivity.this,"Faltan ingresar campos",Toast.LENGTH_LONG).show();
+                else{
+                    Toast.makeText(PlatoActivity.this,"Faltan ingresar campos",Toast.LENGTH_LONG).show();
                 }
             }
         });

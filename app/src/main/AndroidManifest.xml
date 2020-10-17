@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".ListItemsActivity"></activity>
 
-        <receiver android:name = ".model.NotificacionPedido" />
+        <receiver android:name=".model.NotificacionPedido" />
+
         <activity
             android:name=".ListaPlatos"
             android:parentActivityName=".HomeActivity" />
