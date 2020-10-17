@@ -1,7 +1,9 @@
 package ar.com.lls.sendmeal.model;
 
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 
@@ -9,11 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@Entity
+//Relacionar con Pedido
+@Entity(foreignKeys = @ForeignKey(entity = Pedido.class,
+        parentColumns = "id",
+        childColumns = "pedidoId")) //Este nombre indica el nombre de la columna que va a tener en la tabla plato de la BD
+
 public class Plato {
     @PrimaryKey(autoGenerate = true)
-
     private Long id;
+
+    @ColumnInfo(name = "id")
+    public int pedidoId; // Así se llama dentro de ESTA clase
+
+
     private String titulo;
     private String descripcion;
     private Double precio;

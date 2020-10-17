@@ -21,6 +21,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract PlatoDao platoDao();
 
+
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 1;
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
