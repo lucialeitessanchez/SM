@@ -22,6 +22,7 @@ public class Plato {
 
     //construct
 
+    //Cuando se quiere guardar un plato desde el botón guardarPlato
     public Plato(String titulo, String descripcion, Double precio, Integer calorias){
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -29,7 +30,7 @@ public class Plato {
         this.calorias = calorias;
     }
 
-
+    //Este constructor es para guardar en la BD
     public Plato(Long id,String titulo, String descripcion, Double precio, Integer calorias) {
         this.id = id;
         this.titulo = titulo;
@@ -37,6 +38,9 @@ public class Plato {
         this.precio = precio;
         this.calorias = calorias;
     }
+
+    //Se usa para el adapter
+    public Plato(){}
 
 
 

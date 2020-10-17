@@ -8,14 +8,13 @@ import androidx.room.RoomDatabase;
 import ar.com.lls.sendmeal.DAO.PlatoDao;
 import ar.com.lls.sendmeal.model.Plato;
 
-import android.content.Context;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import androidx.room.Database;
 import androidx.room.Room;
-import androidx.room.RoomDatabase;
+
+//En este archivo se crea una instancia de AppDatabase utilizando Room
 
 @Database(entities = {Plato.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {

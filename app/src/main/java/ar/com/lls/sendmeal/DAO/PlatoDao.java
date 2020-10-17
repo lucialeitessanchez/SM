@@ -10,6 +10,7 @@ import java.util.List;
 
 import ar.com.lls.sendmeal.model.Plato;
 
+///Este archivo dao es una "foto" de los métodos que vamos a usar. La implementación de estos métodos están en appRepository.java
 @Dao
 public interface PlatoDao {
     @Insert
