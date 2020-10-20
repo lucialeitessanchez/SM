@@ -32,7 +32,7 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "db_send_meal")
+                            AppDatabase.class, "developm_gabipiedrabuena")
                             .build();
                 }
             }

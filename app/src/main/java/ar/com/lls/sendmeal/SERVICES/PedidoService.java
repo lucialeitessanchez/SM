@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder;
 import java.util.List;
 
 import ar.com.lls.sendmeal.model.Pedido;
-import ar.com.lls.sendmeal.model.Plato;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
