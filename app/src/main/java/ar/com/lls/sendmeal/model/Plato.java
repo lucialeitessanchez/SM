@@ -20,7 +20,7 @@ public class Plato {
     @PrimaryKey(autoGenerate = true)
     private Long id;
 
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "pedidoId")
     public int pedidoId; // Así se llama dentro de ESTA clase
 
 
