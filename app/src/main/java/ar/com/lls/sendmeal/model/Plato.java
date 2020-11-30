@@ -4,8 +4,11 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+
+import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,25 +17,26 @@ import java.util.Random;
 //Relacionar con Pedido
 @Entity(foreignKeys = @ForeignKey(entity = Pedido.class,
         parentColumns = "id",
-        childColumns = "pedidoId")) //Este nombre indica el nombre de la columna que va a tener en la tabla plato de la BD
+        childColumns = "pedido_id")) //Este nombre indica el nombre de la columna que va a tener en la tabla plato de la BD
 
 public class Plato {
     @PrimaryKey(autoGenerate = true)
     private Long id;
 
-    @ColumnInfo(name = "pedidoId")
+    @ColumnInfo(name = "pedido_id", index = true)
     public int pedidoId; // Así se llama dentro de ESTA clase
-
 
     private String titulo;
     private String descripcion;
     private Double precio;
     private Integer calorias;
+
+    @Ignore
     public static List<Plato> listaPlatos = new ArrayList<>();
 
     //construct
 
-    //Cuando se quiere guardar un plato desde el botón guardarPlato
+    @Ignore //Cuando se quiere guardar un plato desde el botón guardarPlato
     public Plato(String titulo, String descripcion, Double precio, Integer calorias){
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -49,10 +53,8 @@ public class Plato {
         this.calorias = calorias;
     }
 
-    //Se usa para el adapter
+    @Ignore //Se usa para el adapter
     public Plato(){}
-
-
 
     public void cargarDatosPlato(String titulo,String descripcion, Double precio, Integer calorias) {
 
@@ -64,55 +66,40 @@ public class Plato {
 
     //Getters
     public Long getId(){return id;}
-
     public String getTitulo() {
         return titulo;
     }
-
     public String getDescripcion() {
         return descripcion;
     }
-
     public Double getPrecio() {
         return precio;
     }
-
     public Integer getCalorias() {
         return calorias;
     }
-
     public List<Plato> getListaPlatos() {
         return listaPlatos;
     }
 
     //Setters
     public void setId(Long id){this.id = id;}
-
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
+    public void setPrecio(Double precio) { this.precio = precio; }
     public void setCalorias(Integer calorias) {
         this.calorias = calorias;
     }
-
     public void setListaPlatos(List<Plato> listaPlatos) {
         this.listaPlatos = listaPlatos;
     }
-
     public void guardarPlato(Plato unPlato){
         this.listaPlatos.add(unPlato);
     }
-
-
 
     //el relleno por si encuentra la lista vacia
     public void inicializarPlatos(){

@@ -36,9 +36,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
 
-    implementation "androidx.room:room-runtime:$rootProject.2.2.5'"
-    annotationProcessor "androidx.room:room-compiler:$rootProject.2.2.5'"
-    androidTestImplementation "androidx.room:room-testing:$rootProject.2.2.5'"
+    def rootProject = "2.2.5"
+
+    implementation "androidx.room:room-runtime:$rootProject"
+    annotationProcessor "androidx.room:room-compiler:$rootProject"
+    androidTestImplementation "androidx.room:room-testing:$rootProject"
 
     //Retrofit component
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
