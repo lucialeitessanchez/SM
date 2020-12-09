@@ -155,6 +155,7 @@ public class PedidoActivity extends AppCompatActivity {
         });
     }
 
+
     private boolean validacionOk() {
         if(takeAway.isChecked()){
             if(email.getText().toString().isEmpty()){

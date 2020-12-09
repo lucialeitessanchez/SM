@@ -8,8 +8,9 @@ import android.widget.Toast;
 import java.util.List;
 
 import ar.com.lls.sendmeal.REPOSITORY.AppRepository;
+import ar.com.lls.sendmeal.REPOSITORY.OnPlatoResultCallback;
 
-public class ListItemsActivity extends AppCompatActivity implements AppRepository.OnResultCallback {
+public class ListItemsActivity extends AppCompatActivity implements OnPlatoResultCallback {
 
     private AppRepository repository;
     @Override
@@ -17,8 +18,8 @@ public class ListItemsActivity extends AppCompatActivity implements AppRepositor
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_items);
 
-        repository = new AppRepository(this.getApplication(), this);
-        repository.buscarTodos();
+        repository = new AppRepository(this.getApplication());
+        repository.buscarTodos(this);
     }
 
     @Override

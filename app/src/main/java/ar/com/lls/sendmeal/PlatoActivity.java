@@ -10,9 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
+import ar.com.lls.sendmeal.REPOSITORY.AppRepository;
+import ar.com.lls.sendmeal.REPOSITORY.OnInsertarPlatoResult;
+import ar.com.lls.sendmeal.model.NotificacionPedido;
 import ar.com.lls.sendmeal.model.Plato;
 
-public class PlatoActivity extends AppCompatActivity {
+public class PlatoActivity extends AppCompatActivity implements OnInsertarPlatoResult {
 
     private Toolbar toolbar;
     private EditText tituloPlato;
@@ -26,6 +31,8 @@ public class PlatoActivity extends AppCompatActivity {
     Integer caloriasPlatoInt;
     String tituloPlatoStr;
     String descripcionPlatoStr;
+
+    private AppRepository repository;
 
 
 
@@ -41,6 +48,8 @@ public class PlatoActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true); //boton atras
         // le pongo el titulo de la actividad
         actionBar.setTitle(R.string.crearPlato);
+
+        repository = new AppRepository(this.getApplication());
 
         tituloPlato = (EditText)findViewById(R.id.ETtituloPlato) ;
         descripcionPlato = (EditText)findViewById(R.id.ETdescripcionPlato);
@@ -63,7 +72,8 @@ public class PlatoActivity extends AppCompatActivity {
                     caloriasPlatoInt = Integer.parseInt(caloriasPlato.getText().toString());
 
                     Plato platoCreado = new Plato(tituloPlatoStr,descripcionPlatoStr,precioPlatoD,caloriasPlatoInt);
-                    Plato.listaPlatos.add(platoCreado);
+                    repository.insertar(platoCreado, PlatoActivity.this);
+                    //Plato.listaPlatos.add(platoCreado);
                     Toast.makeText(PlatoActivity.this,"El plato ingresado, se ha guardado correctamente",Toast.LENGTH_LONG).show();
                     //limpio para que pueda ingresar otro nuevo plato si quiere
                     tituloPlato.setText("");
@@ -76,6 +86,12 @@ public class PlatoActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onResult(List result) {
+        // Vamos a obtener una Lista de items como resultado cuando finalize
+        Toast.makeText(PlatoActivity.this, "(PlatoActivity) plato creado!", Toast.LENGTH_SHORT).show();
     }
 
     public boolean validarCamposPlato(){
