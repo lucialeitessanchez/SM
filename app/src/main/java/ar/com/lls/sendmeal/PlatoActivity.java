@@ -89,8 +89,8 @@ public class PlatoActivity extends AppCompatActivity implements OnInsertarPlatoR
     }
 
     @Override
-    public void onResult(List result) {
-        // Vamos a obtener una Lista de items como resultado cuando finalize
+    public void onResult(Long idPlato) {
+        // Mensaje plato creado
         Toast.makeText(PlatoActivity.this, "(PlatoActivity) plato creado!", Toast.LENGTH_SHORT).show();
     }
 

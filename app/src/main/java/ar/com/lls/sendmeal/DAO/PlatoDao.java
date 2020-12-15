@@ -14,7 +14,8 @@ import ar.com.lls.sendmeal.model.Plato;
 @Dao
 public interface PlatoDao {
     @Insert
-    void insertar(Plato plato);
+    //void insertar(Plato plato);
+    Long insertar(Plato unPlato);
 
     @Delete
     void borrar(Plato plato);

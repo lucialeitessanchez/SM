@@ -28,7 +28,6 @@ public class ListaPlatos extends AppCompatActivity {
     public boolean desdePedidoActivity;
     private Activity listaPlatoActivity = this;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
