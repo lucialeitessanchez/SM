@@ -11,15 +11,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.com.lls.sendmeal.REPOSITORY.AppRepository;
+import ar.com.lls.sendmeal.REPOSITORY.OnPlatoResultCallback;
 import ar.com.lls.sendmeal.model.Plato;
 import ar.com.lls.sendmeal.model.PlatoAdapter;
 
-public class ListaPlatos extends AppCompatActivity {
+public class ListaPlatos extends AppCompatActivity implements OnPlatoResultCallback {
 
     private Toolbar toolbar;
     private RecyclerView recycler;
@@ -27,6 +30,8 @@ public class ListaPlatos extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     public boolean desdePedidoActivity;
     private Activity listaPlatoActivity = this;
+
+    private AppRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +65,16 @@ public class ListaPlatos extends AppCompatActivity {
             }
         }
 
+        repository = new AppRepository(this.getApplication());
+        repository.buscarTodos(this);
+    }
 
-        //Crea un nuevo adaptador
-        Plato varPlato = new Plato();
-        List<Plato> listaItems = varPlato.getListaPlatos();
-        adapter = new PlatoAdapter(listaItems,desdePedidoActivity,listaPlatoActivity);
+    @Override
+    public List onResult(List platosEncontrados) {
+        //platosEncontrados = variable de tipo List<Plato> donde están los platos hayados en la BD
+        adapter = new PlatoAdapter(platosEncontrados,desdePedidoActivity,listaPlatoActivity);
         recycler.setAdapter(adapter);
-        varPlato.inicializarPlatos();
 
-
-
-
+        return platosEncontrados;//Hay que retornar un List
     }
 }

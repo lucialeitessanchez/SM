@@ -18,25 +18,14 @@ public class CrearPlato extends AsyncTask<Plato, Void, Long> {
         this.callback = callback;
     }
 
-    /*@Override
-    protected Void doInBackground(Plato... nuevoPlato) {
-       platoDao.insertar(nuevoPlato[0]);//Agrega un plato a la BD
-       return null;
-    }*/
     @Override
     protected Long doInBackground(Plato... nuevoPlato) {
         Long idPlatoCreado = platoDao.insertar(nuevoPlato[0]);//Agrega un plato a la BD
         return idPlatoCreado;
     }
 
-    /*@Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
-        //callback.onResult(aVoid);
-    }*/
     @Override
     protected void onPostExecute(Long idPlatoGuardado) {
-        //super.onPostExecute(idPlatoGuardado);
         callback.onResult(idPlatoGuardado);
     }
 }

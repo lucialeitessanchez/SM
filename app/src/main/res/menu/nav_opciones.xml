@@ -27,5 +27,10 @@
             android:id="@+id/menu_informacion"
             android:icon="@android:drawable/ic_dialog_info"
             />
+        <item
+            android:title="Buscar platos en BD"
+            android:id="@+id/platos_BD"
+            android:icon="@android:drawable/ic_dialog_info"
+            />
     </group>
 </menu>

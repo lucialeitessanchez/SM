@@ -17,7 +17,7 @@ import androidx.room.Room;
 
 //En este archivo se crea una instancia de AppDatabase utilizando Room
 
-@Database(entities = {Plato.class, Pedido.class}, version = 1)
+@Database(entities = {Plato.class, Pedido.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract PlatoDao platoDao();
     public abstract PedidoDao pedidoDao();
@@ -32,6 +32,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context, AppDatabase.class,"db_send_meta")
                             .allowMainThreadQueries()
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

@@ -9,10 +9,12 @@ import java.util.List;
 
 import ar.com.lls.sendmeal.REPOSITORY.AppRepository;
 import ar.com.lls.sendmeal.REPOSITORY.OnPlatoResultCallback;
+import ar.com.lls.sendmeal.model.Plato;
 
 public class ListItemsActivity extends AppCompatActivity implements OnPlatoResultCallback {
 
     private AppRepository repository;
+    List<Plato> platos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +25,10 @@ public class ListItemsActivity extends AppCompatActivity implements OnPlatoResul
     }
 
     @Override
-    public void onResult(List result) {
+    public List onResult(List result) {
         // Vamos a obtener una Lista de items como resultado cuando finalize
         Toast.makeText(ListItemsActivity.this, "Exito!", Toast.LENGTH_SHORT).show();
+         platos = result;
+        return platos;
     }
 }

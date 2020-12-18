@@ -71,10 +71,8 @@ public class PlatoActivity extends AppCompatActivity implements OnInsertarPlatoR
                     precioPlatoD = Double.parseDouble(precioPlato.getText().toString());
                     caloriasPlatoInt = Integer.parseInt(caloriasPlato.getText().toString());
 
-                    Plato platoCreado = new Plato(tituloPlatoStr,descripcionPlatoStr,precioPlatoD,caloriasPlatoInt);
+                    Plato platoCreado = new Plato(null,tituloPlatoStr,descripcionPlatoStr,precioPlatoD,caloriasPlatoInt);
                     repository.insertar(platoCreado, PlatoActivity.this);
-                    //Plato.listaPlatos.add(platoCreado);
-                    Toast.makeText(PlatoActivity.this,"El plato ingresado, se ha guardado correctamente",Toast.LENGTH_LONG).show();
                     //limpio para que pueda ingresar otro nuevo plato si quiere
                     tituloPlato.setText("");
                     descripcionPlato.setText("");
@@ -91,7 +89,7 @@ public class PlatoActivity extends AppCompatActivity implements OnInsertarPlatoR
     @Override
     public void onResult(Long idPlato) {
         // Mensaje plato creado
-        Toast.makeText(PlatoActivity.this, "(PlatoActivity) plato creado!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(PlatoActivity.this, "(PlatoActivity) plato creado!", Toast.LENGTH_LONG).show();
     }
 
     public boolean validarCamposPlato(){

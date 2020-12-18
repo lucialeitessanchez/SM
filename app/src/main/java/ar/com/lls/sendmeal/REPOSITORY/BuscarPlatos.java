@@ -25,7 +25,6 @@ public class BuscarPlatos extends AsyncTask<String, Void, List<Plato>> {
 
     @Override
     protected void onPostExecute(List<Plato> platos) {
-        //super.onPostExecute(platos);
         callback.onResult(platos);
     }
 }
