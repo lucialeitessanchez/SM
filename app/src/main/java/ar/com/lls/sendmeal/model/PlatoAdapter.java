@@ -99,7 +99,9 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
             public void onClick(View view) {
                 Intent devolucion = new Intent();
                 String nombrePlato = holder.titulo.getText().toString(); //se guarda el nombre como un textView
+                Long idPlato = holder.getItemId();
 
+                devolucion.putExtra("idPlato", idPlato);
                 devolucion.putExtra("nombrePlato",nombrePlato);
                 devolucion.putExtra("precioPlato",precioPlatoSeleccionado);
                 miActivity.setResult(RESULT_OK ,devolucion);

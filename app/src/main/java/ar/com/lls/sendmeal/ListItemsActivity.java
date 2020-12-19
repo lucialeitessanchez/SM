@@ -21,7 +21,7 @@ public class ListItemsActivity extends AppCompatActivity implements OnPlatoResul
         setContentView(R.layout.activity_list_items);
 
         repository = new AppRepository(this.getApplication());
-        repository.buscarTodos(this);
+        repository.buscarTodosPlatos(this);
     }
 
     @Override

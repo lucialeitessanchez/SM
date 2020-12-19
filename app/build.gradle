@@ -41,6 +41,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$rootProject"
     annotationProcessor "androidx.room:room-compiler:$rootProject"
     androidTestImplementation "androidx.room:room-testing:$rootProject"
+    implementation "androidx.room:room-guava:$rootProject"
 
     //Retrofit component
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

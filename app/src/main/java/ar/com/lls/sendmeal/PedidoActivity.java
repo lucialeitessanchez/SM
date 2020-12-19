@@ -29,9 +29,15 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ar.com.lls.sendmeal.REPOSITORY.AppRepository;
+import ar.com.lls.sendmeal.REPOSITORY.OnInsertarPedidoPlatoCallback;
+import ar.com.lls.sendmeal.REPOSITORY.OnInsertarPedidoResult;
 import ar.com.lls.sendmeal.model.NotificacionPedido;
+import ar.com.lls.sendmeal.model.Pedido;
+import ar.com.lls.sendmeal.model.PedidoPlato;
 
-public class PedidoActivity extends AppCompatActivity {
+public class PedidoActivity extends AppCompatActivity implements OnInsertarPedidoResult, OnInsertarPedidoPlatoCallback
+{
 
     private Toolbar toolbar;
     private EditText email, direccion, altura, piso, dpto;
@@ -44,20 +50,14 @@ public class PedidoActivity extends AppCompatActivity {
     private TextView montoTotal;
 
     public ArrayList<String> listaPlatosSeleccionados = new ArrayList<>();
+    public ArrayList<Long> listaIdPlatosSeleccionados = new ArrayList<>();
     public Double totalPedido;
 
     private ProgressBar progressBarPedido;
     public final static String CHANNEL_ID = "NOTIFICACION";
     private final static int NOTIFICACION_ID = 1;
 
-
-
-
-    /*int icono = R.mipmap.ic_launcher;
-    Intent intent = new Intent(MainActivity.this, MensajeActivity.class);
-    PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0,intent, 0);   Activity, llamado MensajeActivity y que será el Activity que se lance cuando el usuario haga click en la notificación*/
-
-
+    private AppRepository repository = new AppRepository(this.getApplication());
 
     public static final int LAUNCH_LISTA_PLATOS_ACTIVITY = 1;
 
@@ -154,6 +154,17 @@ public class PedidoActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public Long onResult(Long idPedido) {
+        // Mensaje plato creado
+        Toast.makeText(PedidoActivity.this, " pedido creado!", Toast.LENGTH_LONG).show();
+        return idPedido;
+    }
+
+    @Override
+    public void onResultPedidoPlatoCallback(){
+        Toast.makeText(PedidoActivity.this, "pedido plato creado!", Toast.LENGTH_LONG).show();
+    }
 
 
     private boolean validacionOk() {
@@ -189,11 +200,13 @@ public class PedidoActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK){
             String platoSeleccionado;
 
+            Long idPlato = data.getExtras().getLong("idPlato");
             platoSeleccionado = data.getExtras().getString("nombrePlato"); //trae el nombre y el precio desde la actividad plato adapter
             Double precioSeleccionado = (data.getExtras().getDouble("precioPlato"));
 
             //aca hay que ir armando la lista y la suma de los precios
             listaPlatosSeleccionados.add(platoSeleccionado);
+            listaIdPlatosSeleccionados.add(idPlato);
             totalPedido = totalPedido+precioSeleccionado;
 
             montoTotal.setVisibility(View.VISIBLE);
@@ -208,6 +221,21 @@ public class PedidoActivity extends AppCompatActivity {
             finalizarPedido.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Pedido unPedido = new Pedido();
+                    unPedido.setEmail(email.getText().toString());
+                    unPedido.setEnvioDomicilio(envioDomicilio.isChecked());
+                    unPedido.setTakeAway(takeAway.isChecked());
+                    unPedido.setCasa(casa.isChecked());
+                    unPedido.setDepartamento(departamento.isChecked());
+                    unPedido.setDireccion(direccion.getText().toString());
+                    unPedido.setAltura(altura.getText().toString());
+                    unPedido.setDpto(dpto.getText().toString());
+                    unPedido.setPiso(piso.getText().toString());
+                    unPedido.setTotalPedido(totalPedido);
+
+                    repository.insertarPedido(unPedido,PedidoActivity.this);
+                    repository.insertarPlatoPedido(listaIdPlatosSeleccionados, unPedido, PedidoActivity.this);
+
                     new Task(v.getContext()).execute(listaPlatosSeleccionados.toString());
 
                 }

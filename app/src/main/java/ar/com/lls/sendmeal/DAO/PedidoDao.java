@@ -13,7 +13,7 @@ import ar.com.lls.sendmeal.model.Pedido;
 @Dao
 public interface PedidoDao {
     @Insert
-    void insertar(Pedido pedido);
+    Long insertar(Pedido pedido);
 
     @Delete
     void borrar(Pedido pedido);

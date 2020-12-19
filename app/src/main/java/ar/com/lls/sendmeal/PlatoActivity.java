@@ -10,11 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.List;
-
 import ar.com.lls.sendmeal.REPOSITORY.AppRepository;
 import ar.com.lls.sendmeal.REPOSITORY.OnInsertarPlatoResult;
-import ar.com.lls.sendmeal.model.NotificacionPedido;
 import ar.com.lls.sendmeal.model.Plato;
 
 public class PlatoActivity extends AppCompatActivity implements OnInsertarPlatoResult {
@@ -72,7 +69,7 @@ public class PlatoActivity extends AppCompatActivity implements OnInsertarPlatoR
                     caloriasPlatoInt = Integer.parseInt(caloriasPlato.getText().toString());
 
                     Plato platoCreado = new Plato(null,tituloPlatoStr,descripcionPlatoStr,precioPlatoD,caloriasPlatoInt);
-                    repository.insertar(platoCreado, PlatoActivity.this);
+                    repository.insertarPlato(platoCreado, PlatoActivity.this);
                     //limpio para que pueda ingresar otro nuevo plato si quiere
                     tituloPlato.setText("");
                     descripcionPlato.setText("");

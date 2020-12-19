@@ -62,11 +62,12 @@ public class ListaPlatos extends AppCompatActivity implements OnPlatoResultCallb
                 //Mostrar botón "pedir" porque significa que ListaPlatos se llamó desde PedidoActivity
                 desdePedidoActivity=true;
                 //Log.i("MI ACTIVITY", "El valor del check fue " + check);
+
             }
         }
 
         repository = new AppRepository(this.getApplication());
-        repository.buscarTodos(this);
+        repository.buscarTodosPlatos(this);
     }
 
     @Override

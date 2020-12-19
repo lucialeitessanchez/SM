@@ -24,18 +24,17 @@ public class Pedido {
     @ColumnInfo(name = "envio_domicilio")
     private Boolean envioDomicilio;
     private String email;
-    @ColumnInfo(name = "precio_total")
-    private Double precioTotal;
     private String piso;
     @ColumnInfo(name = "teke_away")
     private Boolean takeAway;
     @ColumnInfo(name = "total_pedido")
     public Double totalPedido;
 
-    @Ignore
-    public ArrayList<String> listaPlatosSeleccionados = new ArrayList<>();
 
-    public Pedido(Long id, String altura, Boolean casa, String dpto, Boolean departamento, String direccion, String dondeEnviamos, Boolean envioDomicilio, String email, Double precioTotal, String piso, Boolean takeAway, Double totalPedido) {
+    public Pedido(){}
+
+    @Ignore
+    public Pedido(Long id, String altura, Boolean casa, String dpto, Boolean departamento, String direccion, String dondeEnviamos, Boolean envioDomicilio, String email, String piso, Boolean takeAway, Double totalPedido) {
         this.id = id;
         this.altura = altura;
         this.casa = casa;
@@ -45,14 +44,13 @@ public class Pedido {
         this.dondeEnviamos = dondeEnviamos;
         this.envioDomicilio = envioDomicilio;
         this.email = email;
-        this.precioTotal = precioTotal;
         this.piso = piso;
         this.takeAway = takeAway;
         this.totalPedido = totalPedido;
     }
 
     //Getters
-    public Double getPrecioTotal() { return precioTotal; }
+
     public Long getId() { return id; }
     public String getEmail() { return email; }
     public String getDireccion() { return direccion; }
@@ -64,11 +62,10 @@ public class Pedido {
     public Boolean getTakeAway() { return takeAway; }
     public Boolean getCasa() { return casa; }
     public Boolean getDepartamento() { return departamento; }
-    public ArrayList<String> getListaPlatosSeleccionados() { return listaPlatosSeleccionados; }
+
     public Double getTotalPedido() { return totalPedido; }
 
     //Setters
-    public void setPrecioTotal(Double precioTotal) { this.precioTotal = precioTotal; }
     public void setId(Long id) {
         this.id = id;
     }
@@ -102,18 +99,16 @@ public class Pedido {
     public void setDepartamento(Boolean departamento) {
         this.departamento = departamento;
     }
-    public void setListaPlatosSeleccionados(ArrayList<String> listaPlatosSeleccionados) {
-        this.listaPlatosSeleccionados = listaPlatosSeleccionados;
-    }
+
     public void setTotalPedido(Double totalPedido) {
         this.totalPedido = totalPedido;
     }
 
     @Ignore //constructs
-    public Pedido( ArrayList<String> listaPlatosSeleccionados, Double precioTotal, String email, String direccion, String altura, String piso, String dpto,
+    public Pedido(   String email, String direccion, String altura, String piso, String dpto,
                   String dondeEnviamos,  Boolean envioDomicilio, Boolean takeAway, Boolean casa, Boolean departamento){
-        this.listaPlatosSeleccionados = listaPlatosSeleccionados;
-        this.precioTotal = precioTotal;
+
+
         this.email = email;
         this.direccion = direccion;
         this.altura = altura;
@@ -124,13 +119,6 @@ public class Pedido {
         this.envioDomicilio = envioDomicilio;
         this.casa = casa;
         this.departamento = departamento;
-    }
-
-    @Ignore
-    public Pedido(Long id, Double precioTotal, ArrayList<String> listaPlatosSeleccionados){
-        this.id = id;
-        this.precioTotal = precioTotal;
-        this.listaPlatosSeleccionados = listaPlatosSeleccionados;
     }
 
 

@@ -20,18 +20,12 @@ import static androidx.room.ForeignKey.SET_DEFAULT;
 import static androidx.room.ForeignKey.SET_NULL;
 
 //Relacionar con Pedido
-@Entity(foreignKeys = @ForeignKey(entity = Pedido.class,
-        parentColumns = "id",
-        childColumns = "pedido_id", //Este nombre indica el nombre de la columna que va a tener en la tabla plato de la BD
-        onDelete = SET_DEFAULT,
-        onUpdate = SET_DEFAULT))
+@Entity
 
 public class Plato {
     @PrimaryKey(autoGenerate = true)
     private Long id;
 
-    @ColumnInfo(name = "pedido_id", index = true)
-    public Long pedidoId; // Así se llama dentro de ESTA clase
 
     private String titulo;
     private String descripcion;
