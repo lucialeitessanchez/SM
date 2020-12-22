@@ -27,5 +27,10 @@
             android:id="@+id/menu_informacion"
             android:icon="@android:drawable/ic_dialog_info"
             />
+        <item
+            android:title="Listar Pedidos"
+            android:id="@+id/lista_pedidos"
+            android:icon="@android:drawable/ic_dialog_info"
+            />
     </group>
 </menu>

@@ -35,6 +35,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         public TextView titulo;
         public TextView precio;
         public TextView descripcion;
+        public TextView idDePlato;
         public CardView cardView;
         public CheckedTextView cbSeleccionar;
         private Activity listaPlato;
@@ -48,6 +49,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
             titulo = (TextView) v.findViewById(R.id.tituloPlato);
             precio = (TextView) v.findViewById(R.id.precioPlato);
             descripcion = (TextView) v.findViewById(R.id.descripcionPlato);
+            idDePlato =  v.findViewById(R.id.idDelPlato);
             cardView = (CardView) v.findViewById(R.id.card_view);
             cbSeleccionar = (CheckedTextView) v.findViewById(R.id.cbPedir);
             imgSeleccionar = (ImageView) v.findViewById(R.id.imgSeleccionar);
@@ -86,6 +88,8 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
         holder.titulo.setText(items.get(position).getTitulo());
         holder.precio.setText("$"+items.get(position).getPrecio().toString()); //ojo hay que hacerlo string porque devuelve un entero
         holder.descripcion.setText(items.get(position).getDescripcion());
+        holder.idDePlato.setText((items.get(position).getId().toString()));
+        holder.idDePlato.setVisibility(GONE);
 
         final Double precioPlatoSeleccionado = items.get(position).getPrecio(); //guardo directamente el valor del double
 
@@ -99,7 +103,7 @@ public class PlatoAdapter extends RecyclerView.Adapter<PlatoAdapter.PlatoViewHol
             public void onClick(View view) {
                 Intent devolucion = new Intent();
                 String nombrePlato = holder.titulo.getText().toString(); //se guarda el nombre como un textView
-                Long idPlato = holder.getItemId();
+                String idPlato = holder.idDePlato.getText().toString();//holder.getItemId();
 
                 devolucion.putExtra("idPlato", idPlato);
                 devolucion.putExtra("nombrePlato",nombrePlato);

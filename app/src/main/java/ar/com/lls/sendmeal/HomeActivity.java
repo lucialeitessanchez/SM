@@ -66,6 +66,11 @@ public class HomeActivity extends AppCompatActivity {
                         Toast.makeText(HomeActivity.this,"Laboratorio de Gauchat,Leites,Piedrabuena",Toast.LENGTH_LONG).show();
                         startActivity(i);
                         break;
+                    case(R.id.lista_pedidos):
+                        // tirar informacion de la aplicacion
+                        i = new Intent(HomeActivity.this,ListItemsActivity.class);
+                        startActivity(i);
+                        break;
                 }
                 return false;
             }

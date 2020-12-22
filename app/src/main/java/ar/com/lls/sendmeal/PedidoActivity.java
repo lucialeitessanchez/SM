@@ -57,7 +57,8 @@ public class PedidoActivity extends AppCompatActivity implements OnInsertarPedid
     public final static String CHANNEL_ID = "NOTIFICACION";
     private final static int NOTIFICACION_ID = 1;
 
-    private AppRepository repository = new AppRepository(this.getApplication());
+    private AppRepository repository;
+    Long idPedido;
 
     public static final int LAUNCH_LISTA_PLATOS_ACTIVITY = 1;
 
@@ -153,12 +154,14 @@ public class PedidoActivity extends AppCompatActivity implements OnInsertarPedid
                 }
             }
         });
+        repository = new AppRepository(this.getApplication());
     }
     @Override
     public Long onResult(Long idPedido) {
         // Mensaje plato creado
         Toast.makeText(PedidoActivity.this, " pedido creado!", Toast.LENGTH_LONG).show();
-        return idPedido;
+        this.idPedido = idPedido;
+        return this.idPedido;
     }
 
     @Override
@@ -200,13 +203,14 @@ public class PedidoActivity extends AppCompatActivity implements OnInsertarPedid
         if(resultCode == RESULT_OK){
             String platoSeleccionado;
 
-            Long idPlato = data.getExtras().getLong("idPlato");
+            String idPlatoString = data.getExtras().getString("idPlato");
+            Long idPlatoLong = Long.valueOf(idPlatoString);
             platoSeleccionado = data.getExtras().getString("nombrePlato"); //trae el nombre y el precio desde la actividad plato adapter
             Double precioSeleccionado = (data.getExtras().getDouble("precioPlato"));
 
             //aca hay que ir armando la lista y la suma de los precios
             listaPlatosSeleccionados.add(platoSeleccionado);
-            listaIdPlatosSeleccionados.add(idPlato);
+            listaIdPlatosSeleccionados.add(idPlatoLong);
             totalPedido = totalPedido+precioSeleccionado;
 
             montoTotal.setVisibility(View.VISIBLE);
@@ -234,7 +238,8 @@ public class PedidoActivity extends AppCompatActivity implements OnInsertarPedid
                     unPedido.setTotalPedido(totalPedido);
 
                     repository.insertarPedido(unPedido,PedidoActivity.this);
-                    repository.insertarPlatoPedido(listaIdPlatosSeleccionados, unPedido, PedidoActivity.this);
+
+                    repository.insertarPlatoPedido(listaIdPlatosSeleccionados, idPedido, PedidoActivity.this);
 
                     new Task(v.getContext()).execute(listaPlatosSeleccionados.toString());
 
