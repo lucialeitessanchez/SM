@@ -58,7 +58,6 @@ public class PedidoActivity extends AppCompatActivity implements OnInsertarPedid
     private final static int NOTIFICACION_ID = 1;
 
     private AppRepository repository;
-    Long idPedido;
 
     public static final int LAUNCH_LISTA_PLATOS_ACTIVITY = 1;
 
@@ -159,9 +158,9 @@ public class PedidoActivity extends AppCompatActivity implements OnInsertarPedid
     @Override
     public Long onResult(Long idPedido) {
         // Mensaje plato creado
-        Toast.makeText(PedidoActivity.this, " pedido creado!", Toast.LENGTH_LONG).show();
-        this.idPedido = idPedido;
-        return this.idPedido;
+        repository.insertarPlatoPedido(listaIdPlatosSeleccionados, idPedido, PedidoActivity.this);
+        Toast.makeText(PedidoActivity.this, "Se a creado el pedido solicitado!", Toast.LENGTH_LONG).show();
+        return idPedido;
     }
 
     @Override
@@ -239,10 +238,7 @@ public class PedidoActivity extends AppCompatActivity implements OnInsertarPedid
 
                     repository.insertarPedido(unPedido,PedidoActivity.this);
 
-                    repository.insertarPlatoPedido(listaIdPlatosSeleccionados, idPedido, PedidoActivity.this);
-
                     new Task(v.getContext()).execute(listaPlatosSeleccionados.toString());
-
                 }
             });
 

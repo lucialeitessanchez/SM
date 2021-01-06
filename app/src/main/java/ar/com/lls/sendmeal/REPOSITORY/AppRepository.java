@@ -36,11 +36,15 @@ public class AppRepository{
         new CrearPedido(pedidoDao,callback).execute(pedidoACrear);
     }
 
-    public void insertarPlatoPedido(final List<Long> idPlatos, final Long Idpedido, OnInsertarPedidoPlatoCallback callback) {
+    public void insertarPlatoPedido(final List<Long> idPlatos, final Long pedido, OnInsertarPedidoPlatoCallback callback) {
         final int size = idPlatos.size();
         for (int i = 0; i < size; i++) {
             Long idPlato = idPlatos.get(i);
-            PedidoPlato pedidoPlato = new PedidoPlato(Idpedido, idPlato);
+            PedidoPlato pedidoPlato = new PedidoPlato(pedido, idPlato);
+
+            if(pedidoPlato.getIdPedido() == null) {
+                pedidoPlato.setIdPedido(pedido);
+            }
 
             new CrearPedidoPlato(pedidoplatoDao, callback).execute(pedidoPlato);
         }

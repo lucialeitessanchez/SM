@@ -17,6 +17,7 @@ public class CrearPedido extends AsyncTask<Pedido, Void, Long> {
         @Override
         protected Long doInBackground(Pedido... nuevoPedido) {
                 Long idPedidoCreado = pedidoDao.insertar(nuevoPedido[0]);//Agrega un pedido a la BD
+                nuevoPedido[0].setId(idPedidoCreado);
                 return idPedidoCreado;
                 }
 
