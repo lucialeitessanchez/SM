@@ -5,14 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.List;
+
 import ar.com.lls.sendmeal.REPOSITORY.AppRepository;
 import ar.com.lls.sendmeal.REPOSITORY.OnInsertarPlatoResult;
+import ar.com.lls.sendmeal.SERVICES.PlatoService;
 import ar.com.lls.sendmeal.model.Plato;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PlatoActivity extends AppCompatActivity implements OnInsertarPlatoResult {
 
@@ -48,6 +60,12 @@ public class PlatoActivity extends AppCompatActivity implements OnInsertarPlatoR
 
         repository = new AppRepository(this.getApplication());
 
+
+
+
+
+
+
         tituloPlato = (EditText)findViewById(R.id.ETtituloPlato) ;
         descripcionPlato = (EditText)findViewById(R.id.ETdescripcionPlato);
         precioPlato = (EditText)findViewById(R.id.ETPrecioPlato);
@@ -70,6 +88,30 @@ public class PlatoActivity extends AppCompatActivity implements OnInsertarPlatoR
 
                     Plato platoCreado = new Plato(null,tituloPlatoStr,descripcionPlatoStr,precioPlatoD,caloriasPlatoInt);
                     repository.insertarPlato(platoCreado, PlatoActivity.this);
+                    Gson gson = new GsonBuilder().setLenient().create();
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://192.168.0.45/")
+                            // En la siguiente linea, le especificamos a Retrofit que tiene que usar Gson para deserializar nuestros objetos
+                            .addConverterFactory(GsonConverterFactory.create(gson))
+                            .build();
+                    PlatoService platoService = retrofit.create(PlatoService.class);
+                    Call<Plato> callPlatos = platoService.createPlato(platoCreado);
+
+                    callPlatos.enqueue(
+                            new Callback<Plato>() {
+                                @Override
+                                public void onResponse(Call<Plato> call, Response<Plato> response) {
+                                    if (response.code() == 200) {
+                                        Log.d("DEBUG", "Returno Exitoso");
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Plato> call, Throwable t) {
+                                    Log.d("DEBUG", "Returno Fallido");
+                                }
+                            }
+                    );
                     //limpio para que pueda ingresar otro nuevo plato si quiere
                     tituloPlato.setText("");
                     descripcionPlato.setText("");

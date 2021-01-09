@@ -34,12 +34,5 @@ public interface PlatoService {
     createPlato(bodyExample.toString())
   */
 
-    Gson gson = new GsonBuilder().setLenient().create();
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://10.0.2.2/")
-            // En la siguiente linea, le especificamos a Retrofit que tiene que usar Gson para deserializar nuestros objetos
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build();
 
-    PlatoService platoService = retrofit.create(PlatoService.class);
 }
